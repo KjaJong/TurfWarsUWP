@@ -1,7 +1,26 @@
-﻿namespace Turf_war_UWP.Powers
+﻿using Windows.UI.WebUI;
+
+namespace Turf_war_UWP.Powers
 {
-    public class PowerUp
+    public abstract class PowerUp
     {
-        
+        public readonly int Cost;
+        public bool IsBought;
+
+        //TODO: Must be a time.
+        public double CoolDown;
+        public int LevelRestriction;
+        public readonly string Description;
+
+        protected PowerUp(int cost, double coolDown, int levelRestriction, string description)
+        {
+            Cost = cost;
+            CoolDown = coolDown;
+            LevelRestriction = levelRestriction;
+            Description = description;
+        }
+
+        public abstract void Activate();
+        public abstract void Buy();
     }
 }
