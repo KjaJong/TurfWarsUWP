@@ -24,11 +24,11 @@ namespace Turf_Wars
 
             Level = 1;
             Coinz = 0;
+            _experience = 0;
+            _expToNextLvl = 100;
 
             Team = team;
 
-            _experience = 0;
-            _expToNextLvl = 100;
         }
     }
 }

@@ -129,6 +129,7 @@
     <Compile Include="Powers\PowerUp.cs" />
     <Compile Include="Powers\Tank.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PUP.cs" />
     <Compile Include="Teams\Team.cs" />
     <Compile Include="Teams\TeamBlue.cs" />
     <Compile Include="Teams\TeamRed.cs" />
