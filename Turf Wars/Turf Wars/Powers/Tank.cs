@@ -1,4 +1,4 @@
-﻿namespace Turf_war_UWP.Powers
+﻿namespace Turf_Wars.Powers
 {
     public class Tank : PowerUp
     {

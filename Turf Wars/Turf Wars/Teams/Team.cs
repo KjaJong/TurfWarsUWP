@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Turf_war_UWP.Teams
+namespace Turf_Wars.Teams
 {
     public abstract class Team
     {

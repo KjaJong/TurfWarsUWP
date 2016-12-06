@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Turf_war_UWP.Powers;
-using Turf_war_UWP.Teams;
+﻿using System.Collections.Generic;
+using Turf_Wars.Powers;
+using Turf_Wars.Teams;
 
-namespace Turf_war_UWP
+namespace Turf_Wars
 {
     public class Player
     {

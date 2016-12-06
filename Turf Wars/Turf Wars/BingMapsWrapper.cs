@@ -1,4 +1,4 @@
-﻿namespace Turf_war_UWP
+﻿namespace Turf_Wars
 {
     public class BingMapsWrapper
     {

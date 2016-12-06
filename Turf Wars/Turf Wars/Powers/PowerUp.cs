@@ -1,6 +1,4 @@
-﻿using Windows.UI.WebUI;
-
-namespace Turf_war_UWP.Powers
+﻿namespace Turf_Wars.Powers
 {
     public abstract class PowerUp
     {
