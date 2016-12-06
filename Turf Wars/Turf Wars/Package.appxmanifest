@@ -7,14 +7,14 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="518922f5-ebe3-4f54-921e-785cbd826bcf"
+    Name="24eaf920-603b-4388-91ba-98eb21b7f2a9"
     Publisher="CN=gijsb"
     Version="1.0.0.0" />
 
-  <mp:PhoneIdentity PhoneProductId="518922f5-ebe3-4f54-921e-785cbd826bcf" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="24eaf920-603b-4388-91ba-98eb21b7f2a9" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
-    <DisplayName>Turf war UWP</DisplayName>
+    <DisplayName>Turf Wars</DisplayName>
     <PublisherDisplayName>gijsb</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
@@ -30,12 +30,12 @@
   <Applications>
     <Application Id="App"
       Executable="$targetnametoken$.exe"
-      EntryPoint="Turf_war_UWP.App">
+      EntryPoint="Turf_Wars.App">
       <uap:VisualElements
-        DisplayName="Turf war UWP"
+        DisplayName="Turf Wars"
         Square150x150Logo="Assets\Square150x150Logo.png"
         Square44x44Logo="Assets\Square44x44Logo.png"
-        Description="Turf war UWP"
+        Description="Turf Wars"
         BackgroundColor="transparent">
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png"/>
         <uap:SplashScreen Image="Assets\SplashScreen.png" />

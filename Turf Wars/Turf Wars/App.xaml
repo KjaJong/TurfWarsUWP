@@ -1,8 +1,8 @@
 ﻿<Application
-    x:Class="Turf_war_UWP.App"
+    x:Class="Turf_Wars.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Turf_war_UWP"
+    xmlns:local="using:Turf_Wars"
     RequestedTheme="Light">
 
 </Application>
