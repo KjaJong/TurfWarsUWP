@@ -5,9 +5,10 @@
     xmlns:local="using:Turf_Wars.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Maps="using:Windows.UI.Xaml.Controls.Maps"
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+        <Maps:MapControl x:Name = "TurfWarsMapControl" MapServiceToken="hQcEz4P2ABGS2oaWXgxQ~I13MdO_wRYZhqBVPFsmenA~Akn-zvWSGQscSlFOLZ3eGyeCGm_8BeDroqxjRoIBcoKfLb-5PU_l62UpAZwXHe0X"/>
     </Grid>
 </Page>
