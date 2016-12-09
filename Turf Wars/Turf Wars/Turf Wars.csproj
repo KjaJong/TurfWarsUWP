@@ -128,6 +128,9 @@
     <Compile Include="Pages\StorePage.xaml.cs">
       <DependentUpon>StorePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\TeamChoserPage.xaml.cs">
+      <DependentUpon>TeamChoserPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Player.cs" />
     <Compile Include="Powers\Attacker.cs" />
     <Compile Include="Powers\Australian.cs" />
@@ -137,6 +140,7 @@
     <Compile Include="Powers\Tank.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PUP.cs" />
+    <Compile Include="Teams\NoTeam.cs" />
     <Compile Include="Teams\Team.cs" />
     <Compile Include="Teams\TeamBlue.cs" />
     <Compile Include="Teams\TeamRed.cs" />
@@ -200,6 +204,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\StorePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\TeamChoserPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

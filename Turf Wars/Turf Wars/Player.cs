@@ -12,7 +12,7 @@ namespace Turf_Wars
         
         public int Level;
         public int Coinz;
-        public readonly Team Team;
+        public Team Team;
 
         private int _experience;
         private int _expToNextLvl;
@@ -29,6 +29,8 @@ namespace Turf_Wars
             Coinz = 0;
             _experience = 0;
             _expToNextLvl = 100;
+
+            Team = new NoTeam(0);
         }
 
         public bool CheckLogin(string name, string password)

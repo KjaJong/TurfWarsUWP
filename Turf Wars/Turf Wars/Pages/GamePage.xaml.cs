@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Turf_Wars.Teams;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -51,6 +52,8 @@ namespace Turf_Wars.Pages
 
         private void Selector_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (_player.Team is NoTeam) Frame.Navigate(typeof(TeamChoserPage), _player);
+
             if (Home.IsSelected)
             {
                 MyFrame.Navigate(typeof(MapPage));
@@ -77,6 +80,7 @@ namespace Turf_Wars.Pages
             var player = e.Parameter as Player;
 
             if (player == null) return;
+
             WelcomeBlock.Text = $"Welcome {player.Name}";
             _player = player;
         }
