@@ -9,8 +9,7 @@
 
     <Page.Resources>
         <Style TargetType="TextBlock" x:Key="BlockStyle">
-            <Setter Property="FontSize" Value="24"/>
-            <Setter Property="FontFamily" Value="segoe mdl2 assets"/>
+            <Setter Property="FontSize" Value="20"/>
             <Setter Property="Margin" Value="0,0,20,0"/>
         </Style>
     </Page.Resources>
@@ -44,16 +43,57 @@
             </SplitView.Content>
             
             <SplitView.Pane>
-               <ListBox SelectionMode="Single">
-                   <ListBoxItem>
-                       <StackPanel>
+               <ListBox SelectionMode="Single"
+                        SelectionChanged="Selector_OnSelectionChanged">
+                   <ListBoxItem Name="Home">
+                       <StackPanel Orientation="Horizontal">
                            <TextBlock Style="{StaticResource BlockStyle}"
-                                      Text="&#xE80F;"></TextBlock>
+                                      Text="&#xE80F;"
+                                      FontFamily="segoe mdl2 assets"/>
+                           <TextBlock FontSize="18"
+                                      Text="Home"></TextBlock>
                        </StackPanel>
                    </ListBoxItem>
-               </ListBox>
+
+                    <ListBoxItem Name="Store">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource BlockStyle}"
+                                      Text="&#xE719;"
+                                      FontFamily="segoe mdl2 assets"/>
+                            <TextBlock FontSize="18"
+                                      Text="Store"></TextBlock>
+                        </StackPanel>
+                    </ListBoxItem>
+
+                    <ListBoxItem Name="Bag">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource BlockStyle}"
+                                      Text="&#xE821;"
+                                      FontFamily="segoe mdl2 assets"/>
+                            <TextBlock FontSize="18"
+                                      Text="Bag"></TextBlock>
+                        </StackPanel>
+                    </ListBoxItem>
+
+                    <ListBoxItem Name="Settings">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource BlockStyle}"
+                                      Text="&#xE713;"
+                                      FontFamily="segoe mdl2 assets"/>
+                            <TextBlock FontSize="18"
+                                      Text="Settings"></TextBlock>
+                        </StackPanel>
+                    </ListBoxItem>
+                </ListBox>
             </SplitView.Pane>
 
         </SplitView>
+        
+        <Button Grid.Row="2"
+                Name="BackButton"
+                FontFamily="segoe mdl2 assets"
+                Content="&#xE830;"
+                FontSize="24"
+                Click="Hamburger_OnClick"/>
     </Grid>
 </Page>
