@@ -8,7 +8,7 @@ namespace Turf_Wars
     {
         public string Name;
         public string Email;
-        private string _password;
+        private readonly string _password;
         
         public int Level;
         public int Coinz;
@@ -17,7 +17,7 @@ namespace Turf_Wars
         private int _experience;
         private int _expToNextLvl;
 
-        public List<PowerUp> Powers;
+        public static List<PowerUp> Powers = new List<PowerUp>();
 
         public Player(string name, string password, string email)
         {

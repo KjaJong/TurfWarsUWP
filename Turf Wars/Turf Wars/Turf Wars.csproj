@@ -120,6 +120,9 @@
     <Compile Include="Pages\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\SignUpPage.xaml.cs">
+      <DependentUpon>SignUpPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\SplashPage.xaml.cs">
       <DependentUpon>SplashPage.xaml</DependentUpon>
     </Compile>
@@ -131,6 +134,7 @@
     <Compile Include="Powers\Australian.cs" />
     <Compile Include="Powers\Deceit.cs" />
     <Compile Include="Powers\PowerUp.cs" />
+    <Compile Include="Powers\ObservableCollection.cs" />
     <Compile Include="Powers\Tank.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PUP.cs" />
@@ -187,6 +191,10 @@
     <Page Include="Pages\SettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\SignUpPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\SplashPage.xaml">
       <SubType>Designer</SubType>
