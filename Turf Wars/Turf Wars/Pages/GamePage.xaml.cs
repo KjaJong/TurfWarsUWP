@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.Devices.Geolocation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Maps;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
@@ -25,6 +27,19 @@ namespace Turf_Wars.Pages
         public GamePage()
         {
             this.InitializeComponent();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            TurfWarsMapControl.Center =
+                new Geopoint(new BasicGeoposition()
+                {
+                    Latitude = 51.5857124,
+                    Longitude = 4.793248700000049
+                });
+            TurfWarsMapControl.ZoomLevel = 12;
+            TurfWarsMapControl.LandmarksVisible = true;
+            TurfWarsMapControl.Style = MapStyle.Road;
         }
     }
 }
