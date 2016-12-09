@@ -9,6 +9,20 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Maps:MapControl x:Name = "TurfWarsMapControl" MapServiceToken="hQcEz4P2ABGS2oaWXgxQ~I13MdO_wRYZhqBVPFsmenA~Akn-zvWSGQscSlFOLZ3eGyeCGm_8BeDroqxjRoIBcoKfLb-5PU_l62UpAZwXHe0X"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <TextBlock 
+            Text="Map control"
+            FontSize="36"
+            />
+        
+        <Maps:MapControl 
+            x:Name = "TurfWarsMapControl" 
+            MapServiceToken="hQcEz4P2ABGS2oaWXgxQ~I13MdO_wRYZhqBVPFsmenA~Akn-zvWSGQscSlFOLZ3eGyeCGm_8BeDroqxjRoIBcoKfLb-5PU_l62UpAZwXHe0X"
+            Grid.Row="1"/>
     </Grid>
 </Page>
