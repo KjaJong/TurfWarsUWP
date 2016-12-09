@@ -6,8 +6,89 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
+    
+    <Page.Resources>
+        <Style TargetType="TextBlock" x:Key="MyTextBoxStyle">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+    </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <TextBlock Grid.Row="0"
+                   Text="Welcome to Turf wars"
+                   FontSize="24"
+                   Style="{StaticResource MyTextBoxStyle}"/>
+        
+        <Grid Grid.Row="1" HorizontalAlignment="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
+            <TextBlock Grid.Row="0"
+                     Grid.Column="0"
+                     Text="Username:"
+                     Margin="0,20,20,0"
+                     Style="{StaticResource MyTextBoxStyle}"/>
+            
+            <TextBlock Grid.Row="1"
+                     Grid.Column="0"
+                     Text="Password:"
+                     Margin="0,20,20,0"
+                     Style="{StaticResource MyTextBoxStyle}"/>
+            
+            <TextBox Grid.Row="0"
+                       Name="UsernameBlock"
+                       MinWidth="150"
+                       Grid.Column="1"
+                       Margin="0,20,20,0"/>
+
+            <PasswordBox Grid.Row="1"
+                       Name="PasswordBlock"
+                       MinWidth="150"
+                       Grid.Column="1"
+                       Margin="0,20,20,0"/>
+            
+            <Button Grid.Row="2"
+                    Grid.Column="0"
+                    FontSize="18"
+                    Content="Sign up"
+                    HorizontalAlignment="Center"
+                    Click="ButtonBase_OnClick"
+                    Margin="0,20,0,0"/>
+            
+            
+            <Button Grid.Row="2"
+                    Grid.Column="1"
+                    FontSize="18"
+                    Content="Login"
+                    HorizontalAlignment="Center"
+                    Click="ButtonBase_OnClick"
+                    Margin="0,20,0,0"/>
+            
+            <TextBlock Grid.Row="3"
+                       Grid.Column="0"
+                       Grid.ColumnSpan="2"
+                       Name ="Failed"
+                       FontSize="18"
+                       Text="Wrong password or username"
+                       Visibility="Collapsed"
+                       Foreground="Red"
+                       Margin="0,20,0,0"/>
+        </Grid>
     </Grid>
 </Page>

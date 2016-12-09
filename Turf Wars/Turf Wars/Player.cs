@@ -7,7 +7,9 @@ namespace Turf_Wars
     public class Player
     {
         public string Name;
-        public string Password;
+        public string Email;
+        private string _password;
+        
         public int Level;
         public int Coinz;
         public readonly Team Team;
@@ -17,18 +19,21 @@ namespace Turf_Wars
 
         public List<PowerUp> Powers;
 
-        public Player(string name, string password, Team team)
+        public Player(string name, string password, string email)
         {
             Name = name;
-            Password = password;
+            Email = email;
+            _password = password;
 
             Level = 1;
             Coinz = 0;
             _experience = 0;
             _expToNextLvl = 100;
+        }
 
-            Team = team;
-
+        public bool CheckLogin(string name, string password)
+        {
+            return Name == name && _password == password;
         }
     }
 }
