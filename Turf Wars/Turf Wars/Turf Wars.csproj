@@ -130,6 +130,7 @@
     <Compile Include="Powers\Australian.cs" />
     <Compile Include="Powers\Deceit.cs" />
     <Compile Include="Powers\PowerUp.cs" />
+    <Compile Include="Powers\PowerUpList.cs" />
     <Compile Include="Powers\Tank.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PUP.cs" />
