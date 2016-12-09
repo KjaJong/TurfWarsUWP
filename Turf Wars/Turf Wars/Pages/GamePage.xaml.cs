@@ -23,9 +23,11 @@ namespace Turf_Wars.Pages
     /// </summary>
     public sealed partial class GamePage : Page
     {
+        private Player _player;
         public GamePage()
         {
             this.InitializeComponent();
+            MyFrame.Navigate(typeof(MapPage));
         }
 
         private void Hamburger_OnClick(object sender, RoutedEventArgs e)
@@ -68,6 +70,15 @@ namespace Turf_Wars.Pages
             {
                 MyFrame.Navigate(typeof(SettingsPage));
             }
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            var player = e.Parameter as Player;
+
+            if (player == null) return;
+            WelcomeBlock.Text = $"Welcome {player.Name}";
+            _player = player;
         }
     }
 }
