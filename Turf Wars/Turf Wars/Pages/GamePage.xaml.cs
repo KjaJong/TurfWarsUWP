@@ -26,5 +26,10 @@ namespace Turf_Wars.Pages
         {
             this.InitializeComponent();
         }
+
+        private void Hamburger_OnClick(object sender, RoutedEventArgs e)
+        {
+            MySplitView.IsPaneOpen = !MySplitView.IsPaneOpen;
+        }
     }
 }

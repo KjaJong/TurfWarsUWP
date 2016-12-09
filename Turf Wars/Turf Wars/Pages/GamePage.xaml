@@ -7,7 +7,53 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
+    <Page.Resources>
+        <Style TargetType="TextBlock" x:Key="BlockStyle">
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="FontFamily" Value="segoe mdl2 assets"/>
+            <Setter Property="Margin" Value="0,0,20,0"/>
+        </Style>
+    </Page.Resources>
+    
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <StackPanel Orientation="Horizontal">
+            <Button Name="Hamburger"
+                    FontFamily="segoe mdl2 assets"
+                    FontSize="24"
+                    Content="&#xE700;"
+                    Margin="0,0,20,0"
+                    Click="Hamburger_OnClick"/>
+        <TextBlock Grid.Row="0"
+                   Name="WelcomeBlock"
+                   FontSize="24"
+                   FontWeight="Bold"/>
+        </StackPanel>
+        <SplitView Grid.Row="1"
+                   Name="MySplitView"
+                   DisplayMode="CompactOverlay"
+                   CompactPaneLength="45"
+                   OpenPaneLength="150">
+            <SplitView.Content>
+                <Frame Name="MyFrame"></Frame>
+            </SplitView.Content>
+            
+            <SplitView.Pane>
+               <ListBox SelectionMode="Single">
+                   <ListBoxItem>
+                       <StackPanel>
+                           <TextBlock Style="{StaticResource BlockStyle}"
+                                      Text="&#xE80F;"></TextBlock>
+                       </StackPanel>
+                   </ListBoxItem>
+               </ListBox>
+            </SplitView.Pane>
 
+        </SplitView>
     </Grid>
 </Page>
