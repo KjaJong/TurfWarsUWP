@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.Web.Syndication;
+using Turf_Wars.Teams;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -40,7 +41,11 @@ namespace Turf_Wars.Pages
                 case "login":
                     foreach (var p in GameLogic.Players)
                     {
-                        if (p.CheckLogin(UsernameBlock.Text, PasswordBlock.Password)) Frame.Navigate(typeof(GamePage), p);
+                        if (p.CheckLogin(UsernameBlock.Text, PasswordBlock.Password))
+                        {
+                            if (p.Team is NoTeam) Frame.Navigate(typeof(TeamChoserPage), p);
+                            else Frame.Navigate(typeof(GamePage), p);
+                        }
                         else Failed.Visibility = Visibility.Visible;
                     }
                     break;

@@ -52,8 +52,6 @@ namespace Turf_Wars.Pages
 
         private void Selector_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (_player.Team is NoTeam) Frame.Navigate(typeof(TeamChoserPage), _player);
-
             if (Home.IsSelected)
             {
                 MyFrame.Navigate(typeof(MapPage));

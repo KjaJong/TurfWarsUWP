@@ -41,19 +41,19 @@
             <SplitView.Content>
                 <Frame Name="MyFrame"></Frame>
             </SplitView.Content>
-            
+
             <SplitView.Pane>
-               <ListBox SelectionMode="Single"
+                <ListBox SelectionMode="Single"
                         SelectionChanged="Selector_OnSelectionChanged">
-                   <ListBoxItem Name="Home">
-                       <StackPanel Orientation="Horizontal">
-                           <TextBlock Style="{StaticResource BlockStyle}"
+                    <ListBoxItem Name="Home">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource BlockStyle}"
                                       Text="&#xE80F;"
                                       FontFamily="segoe mdl2 assets"/>
-                           <TextBlock FontSize="18"
+                            <TextBlock FontSize="18"
                                       Text="Home"></TextBlock>
-                       </StackPanel>
-                   </ListBoxItem>
+                        </StackPanel>
+                    </ListBoxItem>
 
                     <ListBoxItem Name="Store">
                         <StackPanel Orientation="Horizontal">
@@ -88,12 +88,5 @@
             </SplitView.Pane>
 
         </SplitView>
-        
-        <Button Grid.Row="2"
-                Name="BackButton"
-                FontFamily="segoe mdl2 assets"
-                Content="&#xE830;"
-                FontSize="24"
-                Click="Hamburger_OnClick"/>
     </Grid>
 </Page>
