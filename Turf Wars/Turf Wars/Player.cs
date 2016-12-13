@@ -15,7 +15,7 @@ namespace Turf_Wars
         public Team Team;
 
         private int _experience;
-        private int _expToNextLvl;
+        private double _expToNextLvl;
 
         public static List<PowerUp> Powers = new List<PowerUp>();
 
@@ -36,6 +36,16 @@ namespace Turf_Wars
         public bool CheckLogin(string name, string password)
         {
             return Name == name && _password == password;
+        }
+
+        public void AddExcperience(int exp)
+        {
+            _experience += exp;
+            if (!(_experience >= _expToNextLvl)) return;
+
+            Level++;
+            _experience = _experience - (int)_expToNextLvl;
+            _expToNextLvl *= 1.5;
         }
     }
 }
