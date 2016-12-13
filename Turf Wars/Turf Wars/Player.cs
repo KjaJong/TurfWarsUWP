@@ -14,8 +14,8 @@ namespace Turf_Wars
         public int Coinz;
         public Team Team;
 
-        private int _experience;
-        private double _expToNextLvl;
+        public int Experience;
+        public double ExpToNextLvl;
 
         public static List<PowerUp> Powers = new List<PowerUp>();
 
@@ -27,8 +27,8 @@ namespace Turf_Wars
 
             Level = 1;
             Coinz = 0;
-            _experience = 0;
-            _expToNextLvl = 100;
+            Experience = 0;
+            ExpToNextLvl = 100;
 
             Team = new NoTeam(0);
         }
@@ -40,12 +40,12 @@ namespace Turf_Wars
 
         public void AddExperience(int exp)
         {
-            _experience += exp;
-            if (!(_experience >= _expToNextLvl)) return;
+            Experience += exp;
+            if (!(Experience >= ExpToNextLvl)) return;
 
             Level++;
-            _experience = _experience - (int)_expToNextLvl;
-            _expToNextLvl *= 1.5;
+            Experience = Experience - (int)ExpToNextLvl;
+            ExpToNextLvl *= 1.5;
         }
     }
 }

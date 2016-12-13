@@ -6,8 +6,82 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-
+    
+    <Page.Resources>
+        <Style TargetType="TextBlock" x:Key="BlockStyle">
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="Margin" Value="20,0,0,20"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="Black"/>
+        </Style>
+    </Page.Resources>
+    
     <Grid Name="MyGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
 
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Column="1"
+                   Grid.Row="0"
+                   Style="{StaticResource BlockStyle}"
+                   Text="Name: "/>
+
+        <TextBlock Grid.Column="1"
+                   Grid.Row="1"
+                   Style="{StaticResource BlockStyle}"
+                   Text="Lvl:"/>
+
+        <TextBlock Grid.Column="1"
+                   Grid.Row="2"
+                   Style="{StaticResource BlockStyle}"
+                   Text="Coins:"/>
+
+        <TextBlock Grid.Column="1"
+                   Grid.Row="3"
+                   Style="{StaticResource BlockStyle}"
+                   Text="Progress"
+                   Margin="20,0,0,0"/>
+
+        <TextBlock Grid.Column="2"
+                   Name="NameBlock"
+                   Grid.Row="0"
+                   Style="{StaticResource BlockStyle}"/>
+
+        <TextBlock Grid.Column="2"
+                   Name="LvLBlock"
+                   Grid.Row="1"
+                   Style="{StaticResource BlockStyle}"/>
+
+        <TextBlock Grid.Column="2"
+                   Name="CoinsBlock"
+                   Grid.Row="2"
+                   Style="{StaticResource BlockStyle}"/>
+
+        <ProgressBar Name="ExpProgressBar"
+                     Grid.Row="4"
+                     Grid.Column="1"
+                     Grid.ColumnSpan="2"
+                     Height="10"
+                     Margin="20,0,0,20"/>
+        
+        <TextBlock Name="ProgressTextBlock"
+                   Style="{StaticResource BlockStyle}"
+                   Grid.Row="5"
+                   Grid.Column="1"
+                   Grid.ColumnSpan="2"/>
     </Grid>
 </Page>
+
+    

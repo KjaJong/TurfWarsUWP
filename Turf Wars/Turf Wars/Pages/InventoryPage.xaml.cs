@@ -27,9 +27,17 @@ namespace Turf_Wars.Pages
         public InventoryPage()
         {
             this.InitializeComponent();
-            if (GamePage.Player.Team is TeamBlue) MyGrid.Background = new SolidColorBrush(Color.FromArgb(255, 0, 255, 255));
-            if (GamePage.Player.Team is TeamRed) MyGrid.Background = new SolidColorBrush(Color.FromArgb(255, 255, 127, 80));
-            if (GamePage.Player.Team is TeamYellow) MyGrid.Background = new SolidColorBrush(Color.FromArgb(255, 255, 215, 0));
+            if (GamePage.Player.Team is TeamBlue) MyGrid.Background = new SolidColorBrush(Colors.Aqua);
+            if (GamePage.Player.Team is TeamRed) MyGrid.Background = new SolidColorBrush(Colors.Coral);
+            if (GamePage.Player.Team is TeamYellow) MyGrid.Background = new SolidColorBrush(Colors.Gold);
+
+            NameBlock.Text = GamePage.Player.Name;
+            LvLBlock.Text = GamePage.Player.Level.ToString();
+            CoinsBlock.Text = GamePage.Player.Coinz.ToString();
+            
+            ExpProgressBar.Maximum = GamePage.Player.ExpToNextLvl;
+            ExpProgressBar.Value = GamePage.Player.Experience;
+            ProgressTextBlock.Text = $"{GamePage.Player.Experience}/{(int)GamePage.Player.ExpToNextLvl}";
         }
     }
 }
