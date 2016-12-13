@@ -38,7 +38,7 @@ namespace Turf_Wars
             return Name == name && _password == password;
         }
 
-        public void AddExcperience(int exp)
+        public void AddExperience(int exp)
         {
             _experience += exp;
             if (!(_experience >= _expToNextLvl)) return;

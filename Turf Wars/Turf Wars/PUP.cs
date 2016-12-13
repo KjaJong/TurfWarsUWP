@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Windows.Devices.Geolocation.Geofencing;
 using Windows.Foundation;
 using Windows.UI.Core;
@@ -20,8 +21,9 @@ namespace Turf_Wars
         public List<Player> RedPlayersInZone;
         public List<Player> YellowPlayersInZone;
         public List<Player> BluePlayersInZone;
+
         private readonly CapturePoint _currentPoint;
-        private DispatcherTimer _timer;
+        private readonly DispatcherTimer _timer;
         private Boolean _gateKeeper = true;
         //private readonly GeoLocation location { get;}
 
@@ -38,7 +40,7 @@ namespace Turf_Wars
             _timer.Tick += (sender, args) =>
             {
                 _timer.Stop();
-                AwardMoney();
+                AwardMoneyAndExp();
                 _gateKeeper = false;
             };
 
@@ -108,9 +110,25 @@ namespace Turf_Wars
         /// <summary>
         /// Awards money and experience based on points captured
         /// </summary>
-        private void AwardMoney()
+        private void AwardMoneyAndExp()
         {
-            //TODO every player gets moneyz and exp
+            foreach (Player p in RedPlayersInZone)
+            {
+                p.Coinz += RedScore/2;
+                p.AddExperience(RedScore);
+            }
+
+            foreach (Player p in BluePlayersInZone)
+            {
+                p.Coinz += BlueScore/2;
+                p.AddExperience(BlueScore);
+            }
+
+            foreach (Player p in YellowPlayersInZone)
+            {
+                p.Coinz = YellowScore/2;
+                p.AddExperience(YellowScore);
+            }
         }
     }
 }
