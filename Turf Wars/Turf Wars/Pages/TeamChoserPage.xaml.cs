@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -45,6 +46,7 @@ namespace Turf_Wars.Pages
                     break;
 
             }
+            Debug.WriteLine(_player.Coinz);
             Frame.Navigate(typeof(GamePage), _player);
         }
 

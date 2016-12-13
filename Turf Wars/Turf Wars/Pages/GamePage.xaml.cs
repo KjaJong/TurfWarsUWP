@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -24,7 +25,7 @@ namespace Turf_Wars.Pages
     /// </summary>
     public sealed partial class GamePage : Page
     {
-        private Player _player;
+        public static Player Player;
         public GamePage()
         {
             this.InitializeComponent();
@@ -69,7 +70,7 @@ namespace Turf_Wars.Pages
 
             if (Settings.IsSelected)
             {
-                MyFrame.Navigate(typeof(SettingsPage));
+                MyFrame.Navigate(typeof(SettingsPage), Player);
             }
         }
 
@@ -80,7 +81,11 @@ namespace Turf_Wars.Pages
             if (player == null) return;
 
             WelcomeBlock.Text = $"Welcome {player.Name}";
-            _player = player;
+            Player = player;
+
+            if (Player.Team is TeamBlue) MyGrid.Background = new SolidColorBrush(Color.FromArgb(255, 0, 255, 255));
+            if (Player.Team is TeamRed) MyGrid.Background = new SolidColorBrush(Color.FromArgb(255, 255, 127, 80));
+            if (Player.Team is TeamYellow) MyGrid.Background = new SolidColorBrush(Color.FromArgb(255, 255, 215, 0));
         }
     }
 }

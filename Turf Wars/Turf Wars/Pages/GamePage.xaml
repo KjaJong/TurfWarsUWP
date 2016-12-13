@@ -14,7 +14,7 @@
         </Style>
     </Page.Resources>
     
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Name="MyGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -39,7 +39,7 @@
                    CompactPaneLength="45"
                    OpenPaneLength="150">
             <SplitView.Content>
-                <Frame Name="MyFrame"></Frame>
+                <Frame Name="MyFrame"/>
             </SplitView.Content>
 
             <SplitView.Pane>
@@ -48,10 +48,10 @@
                     <ListBoxItem Name="Home">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Style="{StaticResource BlockStyle}"
-                                      Text="&#xE80F;"
-                                      FontFamily="segoe mdl2 assets"/>
+                                       Text="&#xE80F;"
+                                       FontFamily="segoe mdl2 assets"/>
                             <TextBlock FontSize="18"
-                                      Text="Home"></TextBlock>
+                                       Text="Home"></TextBlock>
                         </StackPanel>
                     </ListBoxItem>
 
@@ -86,7 +86,6 @@
                     </ListBoxItem>
                 </ListBox>
             </SplitView.Pane>
-
         </SplitView>
     </Grid>
 </Page>
