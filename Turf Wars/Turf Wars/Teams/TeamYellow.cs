@@ -13,7 +13,7 @@ namespace Turf_Wars.Teams
             throw new System.NotImplementedException();
         }
 
-        protected override List<Player> GetAllPlayers(PUP currentPoint)
+        protected override List<Player> GetAllPlayers(Pup currentPoint)
         {
             throw new System.NotImplementedException();
         }

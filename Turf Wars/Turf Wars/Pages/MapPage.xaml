@@ -18,6 +18,9 @@
         <TextBlock 
             Text="Map control"
             FontSize="36"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Grid.Row="0"
             />
         
         <Maps:MapControl 

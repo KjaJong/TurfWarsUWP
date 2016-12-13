@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Windows.Devices.Geolocation;
 using Windows.Devices.Geolocation.Geofencing;
 using Turf_Wars.Pages;
 using Turf_Wars.Teams;
@@ -7,7 +8,7 @@ namespace Turf_Wars
 {
     public class GameLogic
     {
-        public PUP CurrentPoint { get; set; }
+        public Pup CurrentPoint { get; set; }
 
         private List<CapturePoint> _points;
 
@@ -20,21 +21,23 @@ namespace Turf_Wars
             _points = new List<CapturePoint>();
         }
 
-        public void AddCapturePoint(Geofence f, int reward)
+        public void AddCapturePoint(Geofence f, Geopoint g, int reward)
         {
-            _points.Add(new CapturePoint(f, reward));
+            _points.Add(new CapturePoint(f, g, reward));
         }
     }
 
     public class CapturePoint
     {
-        public Geofence Point { get; }
-        public readonly int reward;
+        public Geofence Fence { get; }
+        public Geopoint Point { get; }
+        public readonly int Reward;
 
-        public CapturePoint(Geofence fence, int reward)
+        public CapturePoint(Geofence fence, Geopoint point, int reward)
         {
-            Point = fence;
-            this.reward = reward;
+            Fence = fence;
+            Point = point;
+            Reward = reward;
         }
     }
 }
