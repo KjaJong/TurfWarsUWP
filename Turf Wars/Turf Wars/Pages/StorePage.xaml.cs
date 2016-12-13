@@ -27,9 +27,9 @@ namespace Turf_Wars.Pages
         public StorePage()
         {
             this.InitializeComponent();
-            if (GamePage.Player.Team is TeamBlue) MyGrid.Background = new SolidColorBrush(Color.FromArgb(255, 0, 255, 255));
-            if (GamePage.Player.Team is TeamRed) MyGrid.Background = new SolidColorBrush(Color.FromArgb(255, 255, 127, 80));
-            if (GamePage.Player.Team is TeamYellow) MyGrid.Background = new SolidColorBrush(Color.FromArgb(255, 255, 215, 0));
+            if (GamePage.Player.Team is TeamBlue) MyGrid.Background = new SolidColorBrush(Colors.Aqua);
+            if (GamePage.Player.Team is TeamRed) MyGrid.Background = new SolidColorBrush(Colors.Coral);
+            if (GamePage.Player.Team is TeamYellow) MyGrid.Background = new SolidColorBrush(Colors.Gold);
         }
     }
 }

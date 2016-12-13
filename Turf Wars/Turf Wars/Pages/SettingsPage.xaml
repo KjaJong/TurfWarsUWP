@@ -12,6 +12,7 @@
             <Setter Property="FontSize" Value="24"/>
             <Setter Property="Margin" Value="0,0,20,0"/>
             <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="Black"/>
         </Style>
     </Page.Resources>
     

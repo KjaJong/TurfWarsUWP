@@ -83,9 +83,25 @@ namespace Turf_Wars.Pages
             WelcomeBlock.Text = $"Welcome {player.Name}";
             Player = player;
 
-            if (Player.Team is TeamBlue) MyGrid.Background = new SolidColorBrush(Color.FromArgb(255, 0, 255, 255));
-            if (Player.Team is TeamRed) MyGrid.Background = new SolidColorBrush(Color.FromArgb(255, 255, 127, 80));
-            if (Player.Team is TeamYellow) MyGrid.Background = new SolidColorBrush(Color.FromArgb(255, 255, 215, 0));
+            if (Player.Team is TeamBlue)
+            {
+                MyGrid.Background = new SolidColorBrush(Colors.Aqua);
+                MySplitView.Foreground = new SolidColorBrush(Colors.Aqua);
+            }
+
+            else if (Player.Team is TeamRed)
+            {
+                MyGrid.Background = new SolidColorBrush(Colors.Coral);
+                MySplitView.Foreground = new SolidColorBrush(Colors.Coral);
+            }
+
+            else if (Player.Team is TeamYellow)
+            {
+                MyGrid.Background = new SolidColorBrush(Colors.Gold);
+                MySplitView.Foreground = new SolidColorBrush(Colors.Gold);
+            }
+
+
         }
     }
 }

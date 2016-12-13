@@ -61,7 +61,7 @@
                                       Text="&#xE719;"
                                       FontFamily="segoe mdl2 assets"/>
                             <TextBlock FontSize="18"
-                                      Text="Store"></TextBlock>
+                                      Text="Store"/>
                         </StackPanel>
                     </ListBoxItem>
 
@@ -71,7 +71,7 @@
                                       Text="&#xE821;"
                                       FontFamily="segoe mdl2 assets"/>
                             <TextBlock FontSize="18"
-                                      Text="Bag"></TextBlock>
+                                      Text="Stats"/>
                         </StackPanel>
                     </ListBoxItem>
 
@@ -81,7 +81,7 @@
                                       Text="&#xE713;"
                                       FontFamily="segoe mdl2 assets"/>
                             <TextBlock FontSize="18"
-                                      Text="Settings"></TextBlock>
+                                      Text="Settings"/>
                         </StackPanel>
                     </ListBoxItem>
                 </ListBox>
