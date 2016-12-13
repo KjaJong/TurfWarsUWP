@@ -7,7 +7,110 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Resources>
+        <Style TargetType="TextBlock" x:Key="BlockStyle">
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="Margin" Value="0,0,20,0"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+    </Page.Resources>
+    
+    <Grid Name="MyGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Name="SettingsBlock"
+                   Grid.Row="0"
+                   Grid.Column="1"
+                   Text="Settings"
+                   Style="{StaticResource BlockStyle}"/>
+        
+        <Button Name="ChangeTeam"
+                Grid.Row="2"
+                Grid.Column="1"
+                Grid.ColumnSpan="2"
+                Content="Change team"
+                HorizontalAlignment="Center"
+                Margin="20"
+                FontSize="24"
+                Click="ChangeTeam_OnClick"/>
+        
+        <Button Name="LogoutButton"
+                Grid.Row="3"
+                Grid.Column="1"
+                Grid.ColumnSpan="2"
+                Content="Log out"
+                HorizontalAlignment="Center"
+                Margin="20"
+                FontSize="24"
+                Click="LogoutButton_OnClick"/>
+
+        <TextBlock Name="NotEnoughMunz"
+                   Grid.Row="4"
+                   Grid.Column="1"
+                   Grid.ColumnSpan="2"
+                   HorizontalAlignment="Center"
+                   Text="You don't enough money"
+                   Foreground="Red"
+                   Style="{StaticResource BlockStyle}"
+                   Visibility="Collapsed"/>
+        
+        <Popup Name="ChangeTeamPop"
+               Grid.Row="5"
+               Grid.Column="1"
+               Grid.ColumnSpan="2"
+               HorizontalAlignment="Center">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+               </Grid.RowDefinitions>
+            
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+            
+            <TextBlock Name="YouSureBlock"
+                       Grid.Row="0"
+                       Grid.ColumnSpan="2"
+                       HorizontalAlignment="Center"
+                       Style="{StaticResource BlockStyle}"/>
+            
+            <Button Name="YESYESYESYESYES"
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Content="Yes"
+                    HorizontalAlignment="Right"
+                    Margin="20"
+                    FontSize="24"
+                    Click="YESYESYESYESYES_OnClick"/>
+
+                <Button Name="NONONONONONO"
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Content="No"
+                        HorizontalAlignment="Left"
+                        Margin="20"
+                        FontSize="24"
+                        Click="NONONONONONO_OnClick"/>
+            </Grid>
+            
+        </Popup>
 
     </Grid>
 </Page>
+

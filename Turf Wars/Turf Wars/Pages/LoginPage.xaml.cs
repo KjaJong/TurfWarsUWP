@@ -28,6 +28,7 @@ namespace Turf_Wars.Pages
         public LoginPage()
         {
             this.InitializeComponent();
+            if(GameLogic.Players.Count == 0) GameLogic.Players.Add(new Player("g","g","g"));
         }
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
