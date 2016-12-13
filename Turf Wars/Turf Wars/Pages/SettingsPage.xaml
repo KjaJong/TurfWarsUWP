@@ -72,7 +72,7 @@
                Grid.Row="5"
                Grid.Column="1"
                Grid.ColumnSpan="2"
-               HorizontalAlignment="Center">
+               HorizontalAlignment="Left">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
