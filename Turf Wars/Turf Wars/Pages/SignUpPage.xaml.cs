@@ -63,9 +63,8 @@ namespace Turf_Wars.Pages
                 return;
             }
 
-            foreach (var p in GameLogic.Players)
+            if (GameLogic.Players.Any(p => p.Name.Equals(UsernameBox.Text)))
             {
-                if (!p.Name.Equals(UsernameBox.Text)) continue;
                 Incorrect("Username already exists");
                 return;
             }
