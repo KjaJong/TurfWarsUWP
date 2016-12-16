@@ -96,6 +96,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="BingMapsWrapper.cs" />
+    <Compile Include="DataOpslag.cs" />
     <Compile Include="GameLogic.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -140,7 +141,7 @@
     <Compile Include="Powers\Tank.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PUP.cs" />
+    <Compile Include="Pup.cs" />
     <Compile Include="Teams\NoTeam.cs" />
     <Compile Include="Teams\Team.cs" />
     <Compile Include="Teams\TeamBlue.cs" />

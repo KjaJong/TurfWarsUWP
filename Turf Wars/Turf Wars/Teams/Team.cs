@@ -12,6 +12,6 @@ namespace Turf_Wars.Teams
         }
 
         protected abstract List<Player> GetAllPlayers();
-        protected abstract List<Player> GetAllPlayers(PUP currentPoint);
+        protected abstract List<Player> GetAllPlayers(Pup currentPoint);
     }
 }

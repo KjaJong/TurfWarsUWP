@@ -14,7 +14,7 @@ namespace Turf_Wars.Teams
             throw new NotImplementedException();
         }
 
-        protected override List<Player> GetAllPlayers(PUP currentPoint)
+        protected override List<Player> GetAllPlayers(Pup currentPoint)
         {
             throw new NotImplementedException();
         }
