@@ -62,6 +62,11 @@ namespace Turf_Wars.Pages
             ExpProgressBar.Value = GamePage.Player.Experience;
             ProgressTextBlock.Text = $"{GamePage.Player.Experience}/{(int)GamePage.Player.ExpToNextLvl}";
 
+            if (GamePage.Player.Powers.Count == 0)
+            {
+                PowerUpBlock.Text = "You don't have any power ups";
+                return;
+            }
             _powerUps = GamePage.Player.Powers;
         }
 
@@ -70,7 +75,7 @@ namespace Turf_Wars.Pages
             var obj = (ListView) sender;
             var item = (PowerUp) obj.SelectedItem;
 
-            item?.Activate();
+            //item?.Activate();
         }
     }
 }

@@ -27,7 +27,7 @@ namespace Turf_Wars
             _password = password;
 
             Level = 1;
-            Coinz = 0;
+            Coinz = 50;
             Experience = 0;
             ExpToNextLvl = 100;
 
@@ -37,7 +37,7 @@ namespace Turf_Wars
 
         public bool CheckLogin(string name, string password)
         {
-            return Name == name && _password == password;
+            return Name.Equals(name) && _password.Equals(password);
         }
 
         public void AddExperience(int exp)
@@ -46,6 +46,7 @@ namespace Turf_Wars
             if (!(Experience >= ExpToNextLvl)) return;
 
             Level++;
+            Coinz += 10*Level;
             Experience = Experience - (int)ExpToNextLvl;
             ExpToNextLvl *= 1.5;
         }

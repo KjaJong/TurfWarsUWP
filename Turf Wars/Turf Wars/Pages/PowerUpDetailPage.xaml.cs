@@ -60,8 +60,7 @@ namespace Turf_Wars.Pages
             if (powerUp == null) return;
 
             _powerUp = powerUp;
-            if (_powerUp.IsBought) BuyButton.Content = "Bought";
-            else BuyButton.Content = "Buy";
+            BuyButton.Content = _powerUp.IsBought ? "Bought" : "Buy";
         }
 
         private void BackButton_OnClick(object sender, RoutedEventArgs e)
@@ -74,7 +73,7 @@ namespace Turf_Wars.Pages
         {
             if (GamePage.Player.Coinz >= _powerUp.Cost && !_powerUp.IsBought)
             {
-                GamePage.Player.Coinz = -_powerUp.Cost;
+                GamePage.Player.Coinz -= _powerUp.Cost;
                 GameLogic.PowerUps[(int)_powerUp.PowerUpType].Buy();
 
                 GamePage.Player.Powers.Add(GameLogic.PowerUps[(int)_powerUp.PowerUpType]);
