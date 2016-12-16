@@ -27,6 +27,7 @@ namespace Turf_Wars.Pages
     {
         public static Player Player;
         private GameLogic _gameLogic;
+        private int _coins;
         public GamePage()
         {
             this.InitializeComponent();
@@ -100,7 +101,10 @@ namespace Turf_Wars.Pages
             {
                 MyGrid.Background = new SolidColorBrush(Colors.Gold);
             }
-            
+
+            Coins.Text = Player.Coinz.ToString();
+            _coins = Player.Coinz;
+
         }
     }
 }

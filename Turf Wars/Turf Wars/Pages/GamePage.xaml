@@ -28,16 +28,17 @@
                     Content="&#xE700;"
                     Margin="0,0,20,0"
                     Click="Hamburger_OnClick"/>
-        <TextBlock Name="WelcomeBlock"
-                   FontSize="24"
-                   FontWeight="Bold"
-                   RelativePanel.RightOf="Hamburger"/>
+            <TextBlock Name="WelcomeBlock"
+                       FontSize="24"
+                       FontWeight="Bold"
+                       RelativePanel.RightOf="Hamburger"/>
             <TextBlock Name="Coins"
                        FontSize="20"
                        RelativePanel.AlignRightWithPanel="True"
-                       Text="Is yet to come"/>
+                       Text="{x:Bind _coins}"/>
             <TextBlock RelativePanel.LeftOf="Coins"
                        FontSize="20"
+                       Margin="0,0,4,0"
                        Text="Coins: "/>
         </RelativePanel>
         <SplitView Grid.Row="1"

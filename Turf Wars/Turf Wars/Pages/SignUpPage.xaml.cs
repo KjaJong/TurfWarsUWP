@@ -75,7 +75,6 @@ namespace Turf_Wars.Pages
 
         private void Incorrect(string text)
         {
-
             IncorrectBlock.Text = text;
             IncorrectBlock.Visibility = Visibility.Visible;
 

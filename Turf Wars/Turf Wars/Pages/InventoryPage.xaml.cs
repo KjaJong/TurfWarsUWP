@@ -26,7 +26,7 @@ namespace Turf_Wars.Pages
     /// </summary>
     public sealed partial class InventoryPage : Page
     {
-        private ObservableCollection<PowerUp> _powerUps;
+        private readonly ObservableCollection<PowerUp> _powerUps;
         public InventoryPage()
         {
             this.InitializeComponent();
