@@ -7,7 +7,115 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Resources>
+        <Style TargetType="TextBlock" x:Key="BlockStyle">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="Margin" Value="20,0,0,20"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="Black"/>
+        </Style>
+    </Page.Resources>
 
+    <Grid Name="MyGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0"
+                           Grid.Row="0"
+                           Style="{StaticResource BlockStyle}"
+                           Text="Name: "/>
+
+                <TextBlock Grid.Column="0"
+                           Grid.Row="1"
+                           Style="{StaticResource BlockStyle}"
+                           Text="LvlRestriciton:"/>
+
+                <TextBlock Grid.Column="0"
+                           Grid.Row="2"
+                           Style="{StaticResource BlockStyle}"
+                           Text="Costs:"/>
+
+                <TextBlock Grid.Column="0"
+                           Grid.Row="3"
+                           Style="{StaticResource BlockStyle}"
+                           Text="Description"
+                           Margin="20,0,0,0"/>
+
+                <TextBlock Grid.Column="0"
+                           Grid.Row="4"
+                           Style="{StaticResource BlockStyle}"
+                           FontWeight="Light"
+                           Text="{x:Bind _powerUp.Description}"
+                           Grid.ColumnSpan="2"
+                           TextWrapping="Wrap"
+                           Margin="20,0,0,0"/>
+
+                <TextBlock Grid.Column="1"
+                           Grid.Row="0"
+                           FontWeight="Light"
+                           Style="{StaticResource BlockStyle}"
+                           Text="{x:Bind _powerUp.Name}"/>
+                
+                <TextBlock Grid.Column="1"
+                           Grid.Row="1"
+                           FontWeight="Light"
+                           Style="{StaticResource BlockStyle}"
+                           Text="{x:Bind _powerUp.LevelRestriction}"/>
+
+                <TextBlock Grid.Column="1"
+                           Grid.Row="2"
+                           FontWeight="Light"
+                           Style="{StaticResource BlockStyle}"
+                           Text="{x:Bind _powerUp.Cost}"/>
+
+                <Button Name="BuyButton"
+                        Click="BuyButton_OnClick"
+                        Grid.Row="5"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        HorizontalAlignment="Center"
+                        FontSize="20"
+                        FontWeight="Bold"
+                        Margin="20"/>
+                <TextBlock Name="NotEnoughMunz"
+                           Grid.Row="6"
+                           Grid.Column="0"
+                           Grid.ColumnSpan="2"
+                           Style="{StaticResource BlockStyle}"
+                           Text="You can't buy this"
+                           Foreground="Red"
+                           Visibility="Collapsed"
+                           HorizontalAlignment="Center"/>
+            </Grid>
+            
+            <Button Name="BackButton"
+                Grid.Row="2"
+                FontFamily="segoe mdl2 assets"
+                FontSize="18"
+                Content="&#xE830;"
+                Click="BackButton_OnClick"/>
+            
+           
+        </Grid>
     </Grid>
 </Page>

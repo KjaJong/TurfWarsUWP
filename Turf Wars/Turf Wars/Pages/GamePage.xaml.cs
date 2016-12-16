@@ -26,10 +26,12 @@ namespace Turf_Wars.Pages
     public sealed partial class GamePage : Page
     {
         public static Player Player;
+        private GameLogic _gameLogic;
         public GamePage()
         {
             this.InitializeComponent();
             MyFrame.Navigate(typeof(MapPage));
+            _gameLogic = new GameLogic();
         }
 
         private void Hamburger_OnClick(object sender, RoutedEventArgs e)
@@ -72,6 +74,7 @@ namespace Turf_Wars.Pages
             {
                 MyFrame.Navigate(typeof(SettingsPage), Player);
             }
+            if(MySplitView.IsPaneOpen) MySplitView.IsPaneOpen = false;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -86,22 +89,18 @@ namespace Turf_Wars.Pages
             if (Player.Team is TeamBlue)
             {
                 MyGrid.Background = new SolidColorBrush(Colors.Aqua);
-                MySplitView.Foreground = new SolidColorBrush(Colors.Aqua);
             }
 
             else if (Player.Team is TeamRed)
             {
                 MyGrid.Background = new SolidColorBrush(Colors.Coral);
-                MySplitView.Foreground = new SolidColorBrush(Colors.Coral);
             }
 
             else if (Player.Team is TeamYellow)
             {
                 MyGrid.Background = new SolidColorBrush(Colors.Gold);
-                MySplitView.Foreground = new SolidColorBrush(Colors.Gold);
             }
-
-
+            
         }
     }
 }

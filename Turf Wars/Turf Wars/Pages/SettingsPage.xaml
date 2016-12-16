@@ -33,8 +33,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <TextBlock Name="SettingsBlock"
-                   Grid.Row="0"
+        <TextBlock Grid.Row="0"
                    Grid.Column="1"
                    Text="Settings"
                    Style="{StaticResource BlockStyle}"/>
@@ -64,7 +63,7 @@
                    Grid.Column="1"
                    Grid.ColumnSpan="2"
                    HorizontalAlignment="Center"
-                   Text="You don't enough money"
+                   Text="You don't have enough money"
                    Foreground="Red"
                    Style="{StaticResource BlockStyle}"
                    Visibility="Collapsed"/>

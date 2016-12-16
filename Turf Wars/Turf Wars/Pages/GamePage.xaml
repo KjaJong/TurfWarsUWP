@@ -21,18 +21,25 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         
-        <StackPanel Orientation="Horizontal">
+        <RelativePanel>
             <Button Name="Hamburger"
                     FontFamily="segoe mdl2 assets"
                     FontSize="24"
                     Content="&#xE700;"
                     Margin="0,0,20,0"
                     Click="Hamburger_OnClick"/>
-        <TextBlock Grid.Row="0"
-                   Name="WelcomeBlock"
+        <TextBlock Name="WelcomeBlock"
                    FontSize="24"
-                   FontWeight="Bold"/>
-        </StackPanel>
+                   FontWeight="Bold"
+                   RelativePanel.RightOf="Hamburger"/>
+            <TextBlock Name="Coins"
+                       FontSize="20"
+                       RelativePanel.AlignRightWithPanel="True"
+                       Text="Is yet to come"/>
+            <TextBlock RelativePanel.LeftOf="Coins"
+                       FontSize="20"
+                       Text="Coins: "/>
+        </RelativePanel>
         <SplitView Grid.Row="1"
                    Name="MySplitView"
                    DisplayMode="CompactOverlay"

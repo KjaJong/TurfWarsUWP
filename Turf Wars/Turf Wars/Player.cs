@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Turf_Wars.Powers;
 using Turf_Wars.Teams;
 
@@ -17,7 +18,7 @@ namespace Turf_Wars
         public int Experience;
         public double ExpToNextLvl;
 
-        public static List<PowerUp> Powers = new List<PowerUp>();
+        public ObservableCollection<PowerUp> Powers;
 
         public Player(string name, string password, string email)
         {
@@ -31,6 +32,7 @@ namespace Turf_Wars
             ExpToNextLvl = 100;
 
             Team = new NoTeam(0);
+            Powers = new ObservableCollection<PowerUp>();
         }
 
         public bool CheckLogin(string name, string password)

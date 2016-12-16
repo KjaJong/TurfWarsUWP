@@ -2,8 +2,12 @@
 {
     public class Deceit : PowerUp
     {
-        public Deceit(int cost, double coolDown, int levelRestriction, string description) : base(cost, coolDown, levelRestriction, description)
+        public Deceit(int cost, string description) : base(cost, description)
         {
+            Name = "Deceit";
+            CoolDown = 2;
+            LevelRestriction = 5;
+            PowerUpType = PowerUps.Deceit;
         }
         public override void Activate()
         {
@@ -12,7 +16,7 @@
 
         public override void Buy()
         {
-            throw new System.NotImplementedException();
+            IsBought = true;
         }
 
     }
