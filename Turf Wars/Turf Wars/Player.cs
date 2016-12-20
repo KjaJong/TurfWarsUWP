@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Windows.Devices.Geolocation;
 using Turf_Wars.Powers;
 using Turf_Wars.Teams;
 
@@ -18,6 +19,8 @@ namespace Turf_Wars
         public double ExpToNextLvl;
 
         public static List<PowerUp> Powers = new List<PowerUp>();
+
+        public BasicGeoposition Geoposition { get; set; }
 
         public Player(string name, string password, string email)
         {

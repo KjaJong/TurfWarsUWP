@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,6 +8,7 @@ using Windows.Devices.Geolocation;
 using Windows.Devices.Geolocation.Geofencing;
 using Windows.Foundation;
 using Windows.UI.Xaml.Controls.Maps;
+using Turf_Wars.Pages;
 
 namespace Turf_Wars
 {
@@ -14,12 +16,14 @@ namespace Turf_Wars
     {
         private readonly MapControl _controller;
         private List<Geofence> _fences;
+        private readonly GameLogic _gameLogic;
 
-        public MapCommander(MapControl c)
+        public MapCommander(MapControl c, GameLogic g)
         {
             _controller = c;
             _fences = new List<Geofence>();
-            GeofenceMonitor.Current.GeofenceStateChanged += OnGeofenceStateChanged;
+            _gameLogic = g;
+            FinnishSetup();
         }
 
         ///<summary>
@@ -78,22 +82,30 @@ namespace Turf_Wars
 
                 if (state == GeofenceState.Removed)
                 {
-                    // Remove the geofence from the geofences collection.
                     GeofenceMonitor.Current.Geofences.Remove(geofence);
                 }
                 else if (state == GeofenceState.Entered)
                 {
-                    //TODO (also for exiting) recognize the player that enters and add them (or remove, depending on which trigger) sorted on team
+                    Debug.WriteLine("Senpai entered the fence! (♥ω♥*)");
+                    if (GamePage.Player.Team is Teams.TeamBlue) { _gameLogic.CurrentPoint.BluePlayersInZone.Add(GamePage.Player); }
+                    if (GamePage.Player.Team is Teams.TeamYellow) { _gameLogic.CurrentPoint.YellowPlayersInZone.Add(GamePage.Player); }
+                    if (GamePage.Player.Team is Teams.TeamRed) { _gameLogic.CurrentPoint.RedPlayersInZone.Add(GamePage.Player); }
                 }
                 else if (state == GeofenceState.Exited)
                 {
-                    // Your app takes action based on the exited event.
-
-                    // NOTE: You might want to write your app to take a particular
-                    // action based on whether the app has internet connectivity.
-
+                    Debug.WriteLine("Senpai left ( ≧Д≦)");
+                    if (GamePage.Player.Team is Teams.TeamBlue) { _gameLogic.CurrentPoint.BluePlayersInZone.Remove(GamePage.Player); }
+                    if (GamePage.Player.Team is Teams.TeamYellow) { _gameLogic.CurrentPoint.YellowPlayersInZone.Remove(GamePage.Player); }
+                    if (GamePage.Player.Team is Teams.TeamRed) { _gameLogic.CurrentPoint.RedPlayersInZone.Remove(GamePage.Player); }
                 }
             }
+        }
+
+        private async void FinnishSetup()
+        {
+            var access = await Geolocator.RequestAccessAsync();
+            access = GeolocationAccessStatus.Allowed;
+            GeofenceMonitor.Current.GeofenceStateChanged += OnGeofenceStateChanged;
         }
     }
 }

@@ -24,7 +24,7 @@ namespace Turf_Wars
 
         private readonly CapturePoint _currentPoint;
         private readonly DispatcherTimer _timer;
-        private Boolean _gateKeeper = true;
+        private bool _gateKeeper = true;
         //private readonly GeoLocation location { get;}
 
         public Pup(CapturePoint c)

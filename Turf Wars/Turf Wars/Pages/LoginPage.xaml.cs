@@ -33,31 +33,32 @@ namespace Turf_Wars.Pages
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            var obj = (Button)sender;
+            TestDriverMapCommanderAndSuch.TestAll();
+            //var obj = (Button)sender;
 
-            if (obj.Content != null && obj.Content.ToString() == null) return;
+            //if (obj.Content != null && obj.Content.ToString() == null) return;
 
-            switch (obj.Content.ToString().ToLower())
-            {
-                case "login":
-                    foreach (var p in GameLogic.Players)
-                    {
-                        if (p.CheckLogin(UsernameBlock.Text, PasswordBlock.Password))
-                        {
-                            if (p.Team is NoTeam) Frame.Navigate(typeof(TeamChoserPage), p);
-                            else Frame.Navigate(typeof(GamePage), p);
-                        }
-                        else Failed.Visibility = Visibility.Visible;
-                    }
-                    break;
-                case "sign up":
-                    Frame.Navigate(typeof(SignUpPage));
-                    break;
-                default:
-                    Debug.WriteLine(obj.Content.ToString());
-                    Debug.WriteLine("You're not suppose to be in here");
-                    break;
-            }
+            //switch (obj.Content.ToString().ToLower())
+            //{
+            //    case "login":
+            //        foreach (var p in GameLogic.Players)
+            //        {
+            //            if (p.CheckLogin(UsernameBlock.Text, PasswordBlock.Password))
+            //            {
+            //                if (p.Team is NoTeam) Frame.Navigate(typeof(TeamChoserPage), p);
+            //                else Frame.Navigate(typeof(GamePage), p);
+            //            }
+            //            else Failed.Visibility = Visibility.Visible;
+            //        }
+            //        break;
+            //    case "sign up":
+            //        Frame.Navigate(typeof(SignUpPage));
+            //        break;
+            //    default:
+            //        Debug.WriteLine(obj.Content.ToString());
+            //        Debug.WriteLine("You're not suppose to be in here");
+            //        break;
+            //}
         }
     }
 }
