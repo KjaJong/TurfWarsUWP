@@ -72,13 +72,14 @@ namespace Turf_Wars.Pages
 
         private void BuyButton_OnClick(object sender, RoutedEventArgs e)
         {
-            if (GamePage.Player.Coinz >= _powerUp.Cost && !_powerUp.IsBought)
+            if (GamePage.Player.Coinz >= _powerUp.Cost && !_powerUp.IsBought && GamePage.Player.Level >= _powerUp.LevelRestriction)
             {
                 GamePage.Player.Coinz -= _powerUp.Cost;
                 GameLogic.PowerUps[(int)_powerUp.PowerUpType].Buy();
 
                 GamePage.Player.Powers.Add(GameLogic.PowerUps[(int)_powerUp.PowerUpType]);
                 GamePage.Player.Powers = new ObservableCollection<PowerUp>(GamePage.Player.Powers.OrderBy(x => x.PowerUpType));
+
                 Frame.Navigate(typeof(StorePage));
             }
             else

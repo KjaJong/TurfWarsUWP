@@ -23,17 +23,34 @@ namespace Turf_Wars.Pages
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class GamePage : Page
+    public partial class GamePage : Page
     {
-        public static Player Player;
-        private GameLogic _gameLogic;
-        private int _coins;
+        public static Player Player { get; set; }
         public GamePage()
         {
             this.InitializeComponent();
+
             MyFrame.Navigate(typeof(MapPage));
-            _gameLogic = new GameLogic();
+            WelcomeBlock.Text = $"Welcome {Player.Name}";
+
+            if (Player.Team is TeamBlue)
+            {
+                MyGrid.Background = new SolidColorBrush(Colors.Aqua);
+            }
+
+            else if (Player.Team is TeamRed)
+            {
+                MyGrid.Background = new SolidColorBrush(Colors.Coral);
+            }
+
+            else if (Player.Team is TeamYellow)
+            {
+                MyGrid.Background = new SolidColorBrush(Colors.Gold);
+            }
+
+            Coins.Text = Player.Coinz.ToString();
         }
+
 
         private void Hamburger_OnClick(object sender, RoutedEventArgs e)
         {
@@ -76,35 +93,6 @@ namespace Turf_Wars.Pages
                 MyFrame.Navigate(typeof(SettingsPage), Player);
             }
             if(MySplitView.IsPaneOpen) MySplitView.IsPaneOpen = false;
-        }
-
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            var player = e.Parameter as Player;
-
-            if (player == null) return;
-
-            WelcomeBlock.Text = $"Welcome {player.Name}";
-            Player = player;
-
-            if (Player.Team is TeamBlue)
-            {
-                MyGrid.Background = new SolidColorBrush(Colors.Aqua);
-            }
-
-            else if (Player.Team is TeamRed)
-            {
-                MyGrid.Background = new SolidColorBrush(Colors.Coral);
-            }
-
-            else if (Player.Team is TeamYellow)
-            {
-                MyGrid.Background = new SolidColorBrush(Colors.Gold);
-            }
-
-            Coins.Text = Player.Coinz.ToString();
-            _coins = Player.Coinz;
-
         }
     }
 }

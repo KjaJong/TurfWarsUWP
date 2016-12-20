@@ -50,7 +50,11 @@ namespace Turf_Wars.Pages
                     if (player.CheckLogin(UsernameBlock.Text, PasswordBlock.Password))
                     {
                         if (player.Team is NoTeam) Frame.Navigate(typeof(TeamChoserPage), player);
-                        else Frame.Navigate(typeof(GamePage), player);
+                        else
+                        {
+                            GamePage.Player = player;
+                            Frame.Navigate(typeof(GamePage));
+                        }
                     }
                     Failed.Visibility = Visibility.Visible;
                     break;

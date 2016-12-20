@@ -15,6 +15,11 @@ namespace Turf_Wars.DataWriting
 {
     public class SaveLoadUtil
     {
+        /// <summary>
+        /// Methode for saving an entire player in the local data storage.
+        /// </summary>
+        /// <param name="player"></param>
+        /// <returns></returns>
         public static async Task SavePlayerNames(Player player)
         {
             var storageFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
@@ -31,9 +36,14 @@ namespace Turf_Wars.DataWriting
 
             Debug.WriteLine(names);
 
-            await Windows.Storage.FileIO.WriteTextAsync(playerNamesFile ,names);
+            await Windows.Storage.FileIO.WriteTextAsync(playerNamesFile, names);
         }
 
+        /// <summary>
+        /// Methode for loading an entire player from the local data storage.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public static async Task<Player> LoadPlayerNames(string name)
         {
             try
@@ -80,7 +90,7 @@ namespace Turf_Wars.DataWriting
                     Powers = powerUps
                 };
 
-                player.Powers = new ObservableCollection<PowerUp>(player.Powers.OrderBy(x => x.PowerUpType));
+                player.Powers = new ObservableCollection<PowerUp>(player.Powers.OrderBy(x => x.PowerUpType)); //LINQ
                 return player;
             }
             catch (Exception e)
@@ -88,6 +98,11 @@ namespace Turf_Wars.DataWriting
                 Debug.WriteLine(e.StackTrace);
                 return null;
             }
+        }
+
+        public static async void DeleteAllStorage()
+        {
+            await Windows.Storage.ApplicationData.Current.ClearAsync();
         }
     }
 }

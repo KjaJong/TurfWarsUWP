@@ -6,7 +6,7 @@
         {
             Name = "Attacker";
             CoolDown = 7;
-            LevelRestriction = 5;
+            LevelRestriction = 1;
             PowerUpType = PowerUps.Attacker;
         }
 

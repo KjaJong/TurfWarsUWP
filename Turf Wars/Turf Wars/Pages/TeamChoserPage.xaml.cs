@@ -46,8 +46,9 @@ namespace Turf_Wars.Pages
                     break;
 
             }
-            Debug.WriteLine(_player.Coinz);
-            Frame.Navigate(typeof(GamePage), _player);
+
+            GamePage.Player = _player;
+            Frame.Navigate(typeof(GamePage));
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)

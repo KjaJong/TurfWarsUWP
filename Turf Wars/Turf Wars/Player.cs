@@ -12,7 +12,7 @@ namespace Turf_Wars
         public string Password;
         
         public int Level;
-        public int Coinz;
+        public int Coinz { get; set; }
         public Team Team;
 
         public int Experience;
