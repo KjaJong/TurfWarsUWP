@@ -9,7 +9,7 @@ namespace Turf_Wars
     {
         public string Name;
         public string Email;
-        private readonly string _password;
+        public string Password;
         
         public int Level;
         public int Coinz;
@@ -20,11 +20,12 @@ namespace Turf_Wars
 
         public ObservableCollection<PowerUp> Powers;
 
+        public Player() { }
         public Player(string name, string password, string email)
         {
             Name = name;
             Email = email;
-            _password = password;
+            Password = password;
 
             Level = 1;
             Coinz = 50;
@@ -37,7 +38,7 @@ namespace Turf_Wars
 
         public bool CheckLogin(string name, string password)
         {
-            return Name.Equals(name) && _password.Equals(password);
+            return Name.Equals(name) && Password.Equals(password);
         }
 
         public void AddExperience(int exp)
@@ -49,6 +50,19 @@ namespace Turf_Wars
             Coinz += 10*Level;
             Experience = Experience - (int)ExpToNextLvl;
             ExpToNextLvl *= 1.5;
+        }
+
+        public override string ToString()
+        {
+            return  $"[{Name}]" +
+                    $"[{Email}]" +
+                    $"[{Password}]" +
+                    $"[{Level}]" +
+                    $"[{Coinz}]" +
+                    $"[{Experience}]" +
+                    $"[{ExpToNextLvl}]" +
+                    $"[{Team.Name}]" +
+                    $"[{Powers.Count}]";
         }
     }
 }

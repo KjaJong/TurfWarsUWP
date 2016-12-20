@@ -59,7 +59,7 @@
                                        Text="&#xE80F;"
                                        FontFamily="segoe mdl2 assets"/>
                             <TextBlock FontSize="18"
-                                       Text="Home"></TextBlock>
+                                       Text="Home"/>
                         </StackPanel>
                     </ListBoxItem>
 

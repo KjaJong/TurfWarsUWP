@@ -96,7 +96,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="BingMapsWrapper.cs" />
-    <Compile Include="DataOpslag.cs" />
+    <Compile Include="DataWriting\SaveLoadUtil.cs" />
     <Compile Include="GameLogic.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>

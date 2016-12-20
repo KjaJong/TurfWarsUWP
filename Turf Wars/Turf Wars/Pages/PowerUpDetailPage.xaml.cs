@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -77,6 +78,7 @@ namespace Turf_Wars.Pages
                 GameLogic.PowerUps[(int)_powerUp.PowerUpType].Buy();
 
                 GamePage.Player.Powers.Add(GameLogic.PowerUps[(int)_powerUp.PowerUpType]);
+                GamePage.Player.Powers = new ObservableCollection<PowerUp>(GamePage.Player.Powers.OrderBy(x => x.PowerUpType));
                 Frame.Navigate(typeof(StorePage));
             }
             else

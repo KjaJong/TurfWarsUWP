@@ -15,13 +15,28 @@ namespace Turf_Wars
 
         private List<CapturePoint> _points;
 
-        public static List<Player> Players = new List<Player>();
-        public static ObservableCollection<PowerUp> PowerUps;
+        public static ObservableCollection<PowerUp> PowerUps = new ObservableCollection<PowerUp>()
+        {
+                new Attacker(10, "Attack the infidels"),
+                new Australian(100, "'Stralia!!"),
+                new Deceit(1000, "Trator was a traitor!!! *gasp*"),
+                new Tank(20, "Combine this with a medic (We don't have one, though)")
+        };
+
         private readonly BingMapsWrapper MapWrapper;
 
         public GameLogic()
         {
             _points = new List<CapturePoint>();
+        }
+
+        public void AddCapturePoint(Geofence f, Geopoint g, int reward)
+        {
+            _points.Add(new CapturePoint(f, g, reward));
+        }
+
+        public static void ResetPowerUps()
+        {
             PowerUps = new ObservableCollection<PowerUp>()
             {
                 new Attacker(10, "Attack the infidels"),
@@ -29,11 +44,6 @@ namespace Turf_Wars
                 new Deceit(1000, "Trator was a traitor!!! *gasp*"),
                 new Tank(20, "Combine this with a medic (We don't have one, though)")
             };
-        }
-
-        public void AddCapturePoint(Geofence f, Geopoint g, int reward)
-        {
-            _points.Add(new CapturePoint(f, g, reward));
         }
     }
 

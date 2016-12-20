@@ -10,6 +10,7 @@ namespace Turf_Wars.Teams
     {
         public NoTeam(int totalPoints) : base(totalPoints)
         {
+            Name = "No team";
         }
 
         protected override List<Player> GetAllPlayers()

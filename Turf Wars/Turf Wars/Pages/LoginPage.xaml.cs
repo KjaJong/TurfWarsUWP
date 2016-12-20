@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.Web.Syndication;
+using Turf_Wars.DataWriting;
 using Turf_Wars.Teams;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
@@ -28,27 +29,30 @@ namespace Turf_Wars.Pages
         public LoginPage()
         {
             this.InitializeComponent();
-            if(GameLogic.Players.Count == 0) GameLogic.Players.Add(new Player("g","g","g"));
         }
 
-        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        private async void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
             var obj = (Button)sender;
 
-            if (obj.Content != null && obj.Content.ToString() == null) return;
+            if (obj.Content == null) return;
 
             switch (obj.Content.ToString().ToLower())
             {
                 case "login":
-                    foreach (var p in GameLogic.Players)
+                    var player = await SaveLoadUtil.LoadPlayerNames(UsernameBlock.Text);
+                    if (player == null)
                     {
-                        if (p.CheckLogin(UsernameBlock.Text, PasswordBlock.Password))
-                        {
-                            if (p.Team is NoTeam) Frame.Navigate(typeof(TeamChoserPage), p);
-                            else Frame.Navigate(typeof(GamePage), p);
-                        }
-                        else Failed.Visibility = Visibility.Visible;
+                        Failed.Visibility = Visibility.Visible;
+                        return;
                     }
+                    
+                    if (player.CheckLogin(UsernameBlock.Text, PasswordBlock.Password))
+                    {
+                        if (player.Team is NoTeam) Frame.Navigate(typeof(TeamChoserPage), player);
+                        else Frame.Navigate(typeof(GamePage), player);
+                    }
+                    Failed.Visibility = Visibility.Visible;
                     break;
                 case "sign up":
                     Frame.Navigate(typeof(SignUpPage));
