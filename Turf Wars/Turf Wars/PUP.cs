@@ -35,7 +35,7 @@ namespace Turf_Wars
             _currentPoint = c;
 
             _timer = new DispatcherTimer();
-            _timer.Interval = new TimeSpan(0, 5, 0);
+            _timer.Interval = TimeSpan.FromMinutes(5);
 
             _timer.Tick += (sender, args) =>
             {

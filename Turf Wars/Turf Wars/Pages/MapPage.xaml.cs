@@ -27,6 +27,7 @@ namespace Turf_Wars.Pages
         public MapPage()
         {
             this.InitializeComponent();
+            TestDriverMapCommanderAndSuch.TestAll(TurfWarsMapControl);
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)

@@ -111,5 +111,10 @@ namespace Turf_Wars
             access = GeolocationAccessStatus.Allowed;
             GeofenceMonitor.Current.GeofenceStateChanged += OnGeofenceStateChanged;
         }
+
+        private async void reloadMap(Geopoint g)
+        {
+            //await _controller.TrySetViewBoundsAsync();
+        }
     }
 }
