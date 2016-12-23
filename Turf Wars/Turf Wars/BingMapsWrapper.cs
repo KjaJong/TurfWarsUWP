@@ -40,7 +40,6 @@ namespace Turf_Wars
             try
             {
                 BingMapsControl.Loaded += MapLoadedAsync;
-
                 return true;
             }
             catch (Exception exception)

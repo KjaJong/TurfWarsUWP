@@ -29,18 +29,5 @@ namespace Turf_Wars.Pages
             this.InitializeComponent();
             TestDriverMapCommanderAndSuch.TestAll(TurfWarsMapControl);
         }
-
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            TurfWarsMapControl.Center =
-                new Geopoint(new BasicGeoposition()
-                {
-                    Latitude = 51.5857124,
-                    Longitude = 4.793248700000049
-                });
-            TurfWarsMapControl.ZoomLevel = 12;
-            TurfWarsMapControl.LandmarksVisible = true;
-            TurfWarsMapControl.Style = MapStyle.Road;
-        }
     }
 }

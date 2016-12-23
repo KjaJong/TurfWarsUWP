@@ -13,7 +13,7 @@ namespace Turf_Wars
     {
         public Pup CurrentPoint { get; set; }
 
-        private List<CapturePoint> _points;
+        private List<Pup> _points;
 
         public static ObservableCollection<PowerUp> PowerUps = new ObservableCollection<PowerUp>()
         {
@@ -27,12 +27,14 @@ namespace Turf_Wars
 
         public GameLogic()
         {
-            _points = new List<CapturePoint>();
+            _points = new List<Pup>();
         }
 
-        public void AddCapturePoint(Geofence f, Geopoint g, int reward)
+        public void AddCapturePoint(Geopoint g, int reward)
         {
-            _points.Add(new CapturePoint(f, g, reward));
+            var pup =  new Pup(new CapturePoint(g, reward));
+            CurrentPoint = pup;
+           _points.Add(pup);
         }
 
         public static void ResetPowerUps()
@@ -49,13 +51,11 @@ namespace Turf_Wars
 
     public class CapturePoint
     {
-        public Geofence Fence { get; }
         public Geopoint Point { get; }
         public readonly int Reward;
 
-        public CapturePoint(Geofence fence, Geopoint point, int reward)
+        public CapturePoint(Geopoint point, int reward)
         {
-            Fence = fence;
             Point = point;
             Reward = reward;
         }

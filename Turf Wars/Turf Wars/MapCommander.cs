@@ -4,9 +4,11 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Core;
 using Windows.Devices.Geolocation;
 using Windows.Devices.Geolocation.Geofencing;
 using Windows.Foundation;
+using Windows.UI.Core;
 using Windows.UI.Xaml.Controls.Maps;
 using Turf_Wars.Pages;
 
@@ -15,7 +17,6 @@ namespace Turf_Wars
     class MapCommander
     {
         private readonly MapControl _controller;
-        private List<Geofence> _fences;
         private readonly GameLogic _gameLogic;
 
         public BingMapsWrapper Wrapper { get; set; }
@@ -24,9 +25,7 @@ namespace Turf_Wars
         {
             _controller = c;
             Wrapper = new BingMapsWrapper(_controller);
-            _fences = new List<Geofence>();
             _gameLogic = g;
-            AddMonitorListner();
             FinnishSetup();
         }
 
@@ -40,7 +39,8 @@ namespace Turf_Wars
         public void CreateGeofence(string fenceId, Geopoint p, double radius, TimeSpan t)
         {
             MonitoredGeofenceStates states = MonitoredGeofenceStates.Entered | MonitoredGeofenceStates.Exited | MonitoredGeofenceStates.Removed;
-            _fences.Add(new Geofence(fenceId, new Geocircle(p.Position, radius), states, false, t));
+            var fence = new Geofence(fenceId, new Geocircle(p.Position, radius), states, false, t);
+            GeofenceMonitor.Current.Geofences.Add(fence);
             foreach (Geofence g in GeofenceMonitor.Current.Geofences)
             {
                 Debug.WriteLine(g.Id);
@@ -67,6 +67,14 @@ namespace Turf_Wars
             _controller.Center = g;
         }
 
+        public async Task InitializeBingMapsAsync()
+        {
+            // Clear the geofence and add the trigger method
+            GeofenceMonitor.Current.Geofences.Clear();
+            GeofenceMonitor.Current.GeofenceStateChanged += OnGeofenceStateChangedAsync;
+        }
+
+
         public void UpdatePoints(List<CapturePoint> capturePoints)
         {
             int count = 1;
@@ -78,16 +86,17 @@ namespace Turf_Wars
             }
         }
 
-        private void AddMonitorListner()
+        public async void OnGeofenceStateChangedAsync(GeofenceMonitor sender, object e)
         {
-            TypedEventHandler<GeofenceMonitor, object> listener = null;
-            listener = (monitor, obj) =>
-            {
-                foreach (var report in monitor.ReadReports())
-                {
-                    GeofenceState state = report.NewState;
+            var reports = sender.ReadReports();
 
-                    Geofence geofence = report.Geofence;
+            await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                foreach (var report in reports)
+                {
+                    var state = report.NewState;
+
+                    var geofence = report.Geofence;
 
                     if (state == GeofenceState.Removed)
                     {
@@ -108,8 +117,7 @@ namespace Turf_Wars
                         if (GamePage.Player.Team is Teams.TeamRed) { _gameLogic.CurrentPoint.RedPlayersInZone.Remove(GamePage.Player); }
                     }
                 }
-            };
-            GeofenceMonitor.Current.GeofenceStateChanged += listener;
+            });
         }
 
         private async void FinnishSetup()
