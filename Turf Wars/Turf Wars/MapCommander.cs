@@ -18,9 +18,12 @@ namespace Turf_Wars
         private List<Geofence> _fences;
         private readonly GameLogic _gameLogic;
 
+        public BingMapsWrapper Wrapper { get; set; }
+
         public MapCommander(MapControl c, GameLogic g)
         {
             _controller = c;
+            Wrapper = new BingMapsWrapper(_controller);
             _fences = new List<Geofence>();
             _gameLogic = g;
             AddMonitorListner();
