@@ -13,8 +13,6 @@
             <Setter Property="FontSize" Value="20"/>
             <Setter Property="Margin" Value="0,0,20,0"/>
         </Style>
-        
-        <local:GamePage x:Key="GamePage"/>
     </Page.Resources>
     
     <Grid Name="MyGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
