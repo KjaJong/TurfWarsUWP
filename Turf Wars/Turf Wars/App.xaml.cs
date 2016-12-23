@@ -14,6 +14,8 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Turf_Wars.DataWriting;
+using Turf_Wars.Pages;
 
 namespace Turf_Wars
 {
@@ -96,10 +98,14 @@ namespace Turf_Wars
         /// </summary>
         /// <param name="sender">The source of the suspend request.</param>
         /// <param name="e">Details about the suspend request.</param>
-        private void OnSuspending(object sender, SuspendingEventArgs e)
+        private async void OnSuspending(object sender, SuspendingEventArgs e)
         {
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Save application state and stop any background activity
+            if (GamePage.Player != null)
+            {
+               await SaveLoadUtil.SavePlayerNames(GamePage.Player);
+            }
             deferral.Complete();
         }
     }

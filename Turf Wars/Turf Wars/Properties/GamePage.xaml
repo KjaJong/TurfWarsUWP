@@ -5,6 +5,7 @@
     xmlns:local="using:Turf_Wars.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:turfWars="using:Turf_Wars"
     mc:Ignorable="d">
 
     <Page.Resources>
@@ -12,6 +13,8 @@
             <Setter Property="FontSize" Value="20"/>
             <Setter Property="Margin" Value="0,0,20,0"/>
         </Style>
+        
+        <local:GamePage x:Key="GamePage"/>
     </Page.Resources>
     
     <Grid Name="MyGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -34,8 +37,7 @@
                        RelativePanel.RightOf="Hamburger"/>
             <TextBlock Name="Coins"
                        FontSize="20"
-                       RelativePanel.AlignRightWithPanel="True"
-                       Text="{x:Bind _coins}"/>
+                       RelativePanel.AlignRightWithPanel="True"/>
             <TextBlock RelativePanel.LeftOf="Coins"
                        FontSize="20"
                        Margin="0,0,4,0"
@@ -59,7 +61,7 @@
                                        Text="&#xE80F;"
                                        FontFamily="segoe mdl2 assets"/>
                             <TextBlock FontSize="18"
-                                       Text="Home"></TextBlock>
+                                       Text="Home"/>
                         </StackPanel>
                     </ListBoxItem>
 

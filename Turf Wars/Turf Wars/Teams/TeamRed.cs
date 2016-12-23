@@ -7,6 +7,7 @@ namespace Turf_Wars.Teams
     {
         public TeamRed(int totalPoints) : base(totalPoints)
         {
+            Name = "Red team";
         }
 
         protected override List<Player> GetAllPlayers()

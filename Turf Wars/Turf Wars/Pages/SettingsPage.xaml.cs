@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Turf_Wars.DataWriting;
 using Turf_Wars.Teams;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
@@ -52,15 +53,18 @@ namespace Turf_Wars.Pages
             ChangeTeamPop.IsOpen = false;
         }
 
-        private void YESYESYESYESYES_OnClick(object sender, RoutedEventArgs e)
+        private async void YESYESYESYESYES_OnClick(object sender, RoutedEventArgs e)
         {
             var window = Window.Current.Content as Frame;
             if (window == null) return;
 
             if (_isLogOut)
             {
+                await SaveLoadUtil.SavePlayerNames(GamePage.Player);
+                GameLogic.ResetPowerUps();
                 window.Navigate(typeof(LoginPage));
             }
+
             else
             {
                 if (GamePage.Player.Coinz < 1000)

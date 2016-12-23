@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Turf_Wars.DataWriting;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -48,7 +49,7 @@ namespace Turf_Wars.Pages
             
         }
 
-        private void SignInCheck()
+        private async void SignInCheck()
         {
             if (UsernameBox.Text == "" || PasswordBox.Password == "" || RePasswordBox.Password == "" ||
                 EmailBox.Text == "")
@@ -63,13 +64,14 @@ namespace Turf_Wars.Pages
                 return;
             }
 
-            if (GameLogic.Players.Any(p => p.Name.Equals(UsernameBox.Text)))
+            var player = await SaveLoadUtil.LoadPlayerNames(UsernameBox.Text);
+            if (player != null)
             {
                 Incorrect("Username already exists");
                 return;
             }
 
-            GameLogic.Players.Add(new Player(UsernameBox.Text, PasswordBox.Password, EmailBox.Text));
+            await SaveLoadUtil.SavePlayerNames(new Player(UsernameBox.Text, PasswordBox.Password, EmailBox.Text));
             Frame.Navigate(typeof(LoginPage));
         }
 

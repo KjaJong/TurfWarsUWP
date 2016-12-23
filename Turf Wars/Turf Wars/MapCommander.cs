@@ -37,6 +37,10 @@ namespace Turf_Wars
         {
             MonitoredGeofenceStates states = MonitoredGeofenceStates.Entered | MonitoredGeofenceStates.Exited | MonitoredGeofenceStates.Removed;
             _fences.Add(new Geofence(fenceId, new Geocircle(p.Position, radius), states, false, t));
+            foreach (Geofence g in GeofenceMonitor.Current.Geofences)
+            {
+                Debug.WriteLine(g.Id);
+            }
         }
 
         /// <summary>

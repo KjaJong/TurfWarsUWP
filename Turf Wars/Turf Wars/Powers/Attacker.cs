@@ -8,7 +8,7 @@ namespace Turf_Wars.Powers
         {
             Name = "Attacker";
             CoolDown = TimeSpan.FromSeconds(7);
-            LevelRestriction = 5;
+            LevelRestriction = 1;
             PowerUpType = PowerUps.Attacker;
         }
 
