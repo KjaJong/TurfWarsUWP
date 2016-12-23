@@ -56,18 +56,8 @@
             <TextBlock Text="Re-enter pass:"
                        Grid.Row="3"
                        Style="{StaticResource MyTextBlockStyle}"/>
-            
-            <TextBlock Text="Some fields are not filled in."
-                       Grid.Row="5"
-                       Grid.ColumnSpan="2"
-                       Name="ForgetBlock"
-                       Visibility="Collapsed"
-                       Style="{StaticResource MyTextBlockStyle}"
-                       Foreground="Red"
-                       HorizontalAlignment="Center"/>
 
-            <TextBlock Text="Passwords are not the same."
-                       Grid.Row="5"
+            <TextBlock Grid.Row="5"
                        Grid.ColumnSpan="2"
                        Name="IncorrectBlock"
                        Visibility="Collapsed"

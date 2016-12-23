@@ -1,20 +1,33 @@
-﻿namespace Turf_Wars.Powers
+﻿using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using Turf_Wars.Annotations;
+
+namespace Turf_Wars.Powers
 {
     public abstract class PowerUp
     {
-        public readonly int Cost;
-        public bool IsBought;
+        public enum PowerUps
+        {
+            Attacker,
+            Australian,
+            Deceit,
+            Tank
+        }
+        public int Cost { get; }
+        public bool IsBought { get; set; }
+        public string Name { get; set; }
+        public PowerUps PowerUpType;
 
         //TODO: Must be a time.
-        public double CoolDown;
-        public int LevelRestriction;
-        public readonly string Description;
+        public TimeSpan CoolDown { get; set; }
+        public bool Active { get; set; }
+        public int LevelRestriction { get; set; }
+        public string Description { get; }
 
-        protected PowerUp(int cost, double coolDown, int levelRestriction, string description)
+        protected PowerUp(int cost, string description)
         {
             Cost = cost;
-            CoolDown = coolDown;
-            LevelRestriction = levelRestriction;
             Description = description;
         }
 

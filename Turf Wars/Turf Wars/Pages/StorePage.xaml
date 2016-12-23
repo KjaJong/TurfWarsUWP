@@ -7,7 +7,59 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
+    <Page.Resources>
+        <Style TargetType="TextBlock" x:Key="BlockStyle">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Margin" Value="0,0,20,0"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+    </Page.Resources>
+    
     <Grid Name="MyGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <TextBlock Style="{StaticResource BlockStyle}"
+                   Text="Name"/>
 
+        <TextBlock Style="{StaticResource BlockStyle}"
+                   Text="Costs"
+                   Grid.Column="1"
+                   Grid.Row="0"/>
+
+        <ScrollViewer VerticalScrollBarVisibility="Hidden" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                
+                <ListView Name="NameList" ItemsSource="{x:Bind _powerUps}" Grid.Column="0" SelectionMode="Single" SelectionChanged="Selector_OnSelectionChanged">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+                <ListView Name="MunzList" ItemsSource="{x:Bind _powerUps}" Grid.Column="1" HorizontalAlignment="Center" SelectionMode="Single" SelectionChanged="Selector_OnSelectionChanged">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Cost}"/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+        </ScrollViewer>
     </Grid>
 </Page>
+

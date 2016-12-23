@@ -53,26 +53,33 @@ namespace Turf_Wars.Pages
             if (UsernameBox.Text == "" || PasswordBox.Password == "" || RePasswordBox.Password == "" ||
                 EmailBox.Text == "")
             {
-                IncorrectBlock.Visibility = Visibility.Collapsed;
-                ForgetBlock.Visibility = Visibility.Visible;
-
-                PasswordBox.Password = "";
-                RePasswordBox.Password = "";
+                Incorrect("One or more boxes haven't been filled in");
                 return;
             }
 
             if (PasswordBox.Password != RePasswordBox.Password)
             {
-                IncorrectBlock.Visibility = Visibility.Visible;
-                ForgetBlock.Visibility = Visibility.Collapsed;
+                Incorrect("Passwords are not the same");
+                return;
+            }
 
-                PasswordBox.Password = "";
-                RePasswordBox.Password = "";
+            if (GameLogic.Players.Any(p => p.Name.Equals(UsernameBox.Text)))
+            {
+                Incorrect("Username already exists");
                 return;
             }
 
             GameLogic.Players.Add(new Player(UsernameBox.Text, PasswordBox.Password, EmailBox.Text));
             Frame.Navigate(typeof(LoginPage));
+        }
+
+        private void Incorrect(string text)
+        {
+            IncorrectBlock.Text = text;
+            IncorrectBlock.Visibility = Visibility.Visible;
+
+            PasswordBox.Password = "";
+            RePasswordBox.Password = "";
         }
     }
 }

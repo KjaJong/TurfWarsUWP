@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Windows.Devices.Geolocation;
+using System.Collections.ObjectModel;
 using Turf_Wars.Powers;
 using Turf_Wars.Teams;
 
@@ -18,7 +19,7 @@ namespace Turf_Wars
         public int Experience;
         public double ExpToNextLvl;
 
-        public static List<PowerUp> Powers = new List<PowerUp>();
+        public ObservableCollection<PowerUp> Powers;
 
         public BasicGeoposition Geoposition { get; set; }
 
@@ -29,16 +30,17 @@ namespace Turf_Wars
             _password = password;
 
             Level = 1;
-            Coinz = 0;
+            Coinz = 50;
             Experience = 0;
             ExpToNextLvl = 100;
 
             Team = new NoTeam(0);
+            Powers = new ObservableCollection<PowerUp>();
         }
 
         public bool CheckLogin(string name, string password)
         {
-            return Name == name && _password == password;
+            return Name.Equals(name) && _password.Equals(password);
         }
 
         public void AddExperience(int exp)
@@ -47,6 +49,7 @@ namespace Turf_Wars
             if (!(Experience >= ExpToNextLvl)) return;
 
             Level++;
+            Coinz += 10*Level;
             Experience = Experience - (int)ExpToNextLvl;
             ExpToNextLvl *= 1.5;
         }

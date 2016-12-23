@@ -1,10 +1,15 @@
-﻿namespace Turf_Wars.Powers
+﻿using System;
+
+namespace Turf_Wars.Powers
 {
     public class Tank : PowerUp
     {
-        public Tank(int cost, double coolDown, int levelRestriction, string description) : base(cost, coolDown, levelRestriction, description)
+        public Tank(int cost, string description) : base(cost, description)
         {
-
+            Name = "Tank";
+            CoolDown = TimeSpan.FromSeconds(5);
+            LevelRestriction = 2;
+            PowerUpType = PowerUps.Tank;
         }
 
         public override void Activate()
@@ -14,7 +19,7 @@
 
         public override void Buy()
         {
-            throw new System.NotImplementedException();
+            IsBought = true;
         }
     }
 }
