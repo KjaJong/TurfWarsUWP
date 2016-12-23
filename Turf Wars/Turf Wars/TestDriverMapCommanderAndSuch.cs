@@ -25,7 +25,7 @@ namespace Turf_Wars
 
             Geopoint point = new Geopoint(pos);
 
-            m.CreateGeofence("TestFence 1", point, 5.0, TimeSpan.FromSeconds(3));
+            m.CreateGeofence("TestFence 1", point, 5.0, TimeSpan.Zero);
             m.CreateMapIcon("TestPoint 1", point);
 
             
