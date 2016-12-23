@@ -10,28 +10,21 @@ using Windows.UI.Xaml.Controls.Maps;
 
 namespace Turf_Wars
 {
-    public delegate void OnPositionChanged();
     public class BingMapsWrapper
     {
-        private HttpClient _client;
-        public MapControl _bingMapsControl { get; }
+        public MapControl BingMapsControl { get; }
         private Geolocator _geolocator;
         public MapIcon UserLocationIcon { get; set; }
         public GeolocationAccessStatus AccessStatus { get; set; }
-        private OnPositionChanged _onPositionChanged;
         public BasicGeoposition UserPosition { get; set; }
 
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="bingMapsControl"></param>
-        public BingMapsWrapper(MapControl bingMapsControl, OnPositionChanged onPositionChanged)
+        public BingMapsWrapper(MapControl bingMapsControl)
         {
-            _onPositionChanged = onPositionChanged;
-            _client = new HttpClient();
-            _client.DefaultRequestHeaders.Accept.Clear();
-            _client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-            _bingMapsControl = bingMapsControl;
+            BingMapsControl = bingMapsControl;
             UserLocationIcon = new MapIcon() { Visible = false, Title = "Position", NormalizedAnchorPoint = new Point(0.5, 1.0) };
             bingMapsControl.MapElements.Add(UserLocationIcon);
 
@@ -46,7 +39,7 @@ namespace Turf_Wars
         {
             try
             {
-                _bingMapsControl.Loaded += MapLoadedAsync;
+                BingMapsControl.Loaded += MapLoadedAsync;
 
                 return true;
             }
@@ -95,7 +88,6 @@ namespace Turf_Wars
         private async void OnPositionChangedAsync(Geolocator sender, PositionChangedEventArgs e)
         {
             await GetUserLocationAsync();
-            _onPositionChanged();
         }
 
         /// <summary>
@@ -104,7 +96,7 @@ namespace Turf_Wars
         public async Task FocusOnUserLocationAsync()
         {
             var position = await GetUserLocationAsync();
-            await _bingMapsControl.TrySetSceneAsync(MapScene.CreateFromLocationAndRadius(position, 1000));
+            await BingMapsControl.TrySetSceneAsync(MapScene.CreateFromLocationAndRadius(position, 1000));
         }
 
         /// <summary>
@@ -133,22 +125,6 @@ namespace Turf_Wars
                     }
                 });
             return new Geopoint(basicPosition);
-        }
-
-        /// <summary>
-        /// Help method for sending requests with the client.
-        /// </summary>
-        /// <param name="path"></param>
-        /// <returns></returns>
-        private async Task<dynamic> SendRequestAsync(string path)
-        {
-            dynamic response = null;
-            HttpResponseMessage responseMsg = await _client.GetAsync(path);
-            if (responseMsg.IsSuccessStatusCode)
-            {
-                response = responseMsg.Content.ReadAsAsync<dynamic>();
-            }
-            return response;
         }
 
     }
