@@ -23,6 +23,7 @@ namespace Turf_Wars
             _controller = c;
             _fences = new List<Geofence>();
             _gameLogic = g;
+            AddMonitorListner();
             FinnishSetup();
         }
 
@@ -74,42 +75,44 @@ namespace Turf_Wars
             }
         }
 
-        public async void OnGeofenceStateChanged(GeofenceMonitor sender, object e)
+        private void AddMonitorListner()
         {
-            var reports = sender.ReadReports();
-
-            foreach (GeofenceStateChangeReport report in reports)
+            TypedEventHandler<GeofenceMonitor, object> listener = null;
+            listener = (monitor, obj) =>
             {
-                GeofenceState state = report.NewState;
+                foreach (var report in monitor.ReadReports())
+                {
+                    GeofenceState state = report.NewState;
 
-                Geofence geofence = report.Geofence;
+                    Geofence geofence = report.Geofence;
 
-                if (state == GeofenceState.Removed)
-                {
-                    GeofenceMonitor.Current.Geofences.Remove(geofence);
+                    if (state == GeofenceState.Removed)
+                    {
+                        GeofenceMonitor.Current.Geofences.Remove(geofence);
+                    }
+                    else if (state == GeofenceState.Entered)
+                    {
+                        Debug.WriteLine("Senpai entered the fence! (♥ω♥*)");
+                        if (GamePage.Player.Team is Teams.TeamBlue) { _gameLogic.CurrentPoint.BluePlayersInZone.Add(GamePage.Player); }
+                        if (GamePage.Player.Team is Teams.TeamYellow) { _gameLogic.CurrentPoint.YellowPlayersInZone.Add(GamePage.Player); }
+                        if (GamePage.Player.Team is Teams.TeamRed) { _gameLogic.CurrentPoint.RedPlayersInZone.Add(GamePage.Player); }
+                    }
+                    else if (state == GeofenceState.Exited)
+                    {
+                        Debug.WriteLine("Senpai left ( ≧Д≦)");
+                        if (GamePage.Player.Team is Teams.TeamBlue) { _gameLogic.CurrentPoint.BluePlayersInZone.Remove(GamePage.Player); }
+                        if (GamePage.Player.Team is Teams.TeamYellow) { _gameLogic.CurrentPoint.YellowPlayersInZone.Remove(GamePage.Player); }
+                        if (GamePage.Player.Team is Teams.TeamRed) { _gameLogic.CurrentPoint.RedPlayersInZone.Remove(GamePage.Player); }
+                    }
                 }
-                else if (state == GeofenceState.Entered)
-                {
-                    Debug.WriteLine("Senpai entered the fence! (♥ω♥*)");
-                    if (GamePage.Player.Team is Teams.TeamBlue) { _gameLogic.CurrentPoint.BluePlayersInZone.Add(GamePage.Player); }
-                    if (GamePage.Player.Team is Teams.TeamYellow) { _gameLogic.CurrentPoint.YellowPlayersInZone.Add(GamePage.Player); }
-                    if (GamePage.Player.Team is Teams.TeamRed) { _gameLogic.CurrentPoint.RedPlayersInZone.Add(GamePage.Player); }
-                }
-                else if (state == GeofenceState.Exited)
-                {
-                    Debug.WriteLine("Senpai left ( ≧Д≦)");
-                    if (GamePage.Player.Team is Teams.TeamBlue) { _gameLogic.CurrentPoint.BluePlayersInZone.Remove(GamePage.Player); }
-                    if (GamePage.Player.Team is Teams.TeamYellow) { _gameLogic.CurrentPoint.YellowPlayersInZone.Remove(GamePage.Player); }
-                    if (GamePage.Player.Team is Teams.TeamRed) { _gameLogic.CurrentPoint.RedPlayersInZone.Remove(GamePage.Player); }
-                }
-            }
+            };
+            GeofenceMonitor.Current.GeofenceStateChanged += listener;
         }
 
         private async void FinnishSetup()
         {
             var access = await Geolocator.RequestAccessAsync();
             access = GeolocationAccessStatus.Allowed;
-            GeofenceMonitor.Current.GeofenceStateChanged += OnGeofenceStateChanged;
         }
 
         private async void reloadMap(Geopoint g)
