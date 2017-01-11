@@ -37,7 +37,7 @@ namespace Turf_Wars
             _territoryTimer.Change(TimeSpan.FromSeconds(1).Milliseconds,
                 Timeout.Infinite);
             //TODO if this fucks up change this shit
-            while(BlueScore + YellowScore + RedScore < _currentPoint.Reward) { }
+            while (BlueScore + YellowScore + RedScore < _currentPoint.Reward) {Task.Delay(250);}
             _timerEvent.Set();
         }
 
