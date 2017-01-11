@@ -27,6 +27,12 @@ namespace Turf_Wars.Pages
         public MapPage()
         {
             this.InitializeComponent();
+            BasicGeoposition pos = new BasicGeoposition();
+            pos.Latitude = 51.6611540;
+            pos.Longitude = 4.8584070;
+
+            TurfWarsMapControl.Center = new Geopoint(pos);
+            TurfWarsMapControl.ZoomLevel = 12.5;
             //TestDriverMapCommanderAndSuch.TestAll(TurfWarsMapControl);
         }
     }
