@@ -29,12 +29,12 @@ namespace Turf_Wars
 
             Geopoint point = new Geopoint(pos);
 
+            g.AddCapturePoint(point, 100);
 
             m.CreateGeofence("TestFence 1", point, 20.0, TimeSpan.Zero);
             m.CreateMapIcon("TestPoint 1", point);
 
             Debug.WriteLine("Everything has been intialized. Starting the s̶t̶a̶l̶k̶i̶n̶g̶  monitoring of senpai and the geofence (*^^*)");
-            g.AddCapturePoint(point, 100);
         }
     }
 }
