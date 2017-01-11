@@ -66,7 +66,6 @@ namespace Turf_Wars
                     _geolocator = new Geolocator() { DesiredAccuracyInMeters = 5, ReportInterval = 2000 };
                     await FocusOnUserLocationAsync();
                     _geolocator.PositionChanged += OnPositionChangedAsync;
-                    //SetRoute(); TO-DO: Add list of monuments for testing
                     break;
                 case GeolocationAccessStatus.Denied:
                     //throw new NotImplementedException();

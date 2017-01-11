@@ -108,6 +108,7 @@ namespace Turf_Wars
                         if (GamePage.Player.Team is Teams.TeamBlue) { _gameLogic.CurrentPoint.BluePlayersInZone.Add(GamePage.Player); }
                         if (GamePage.Player.Team is Teams.TeamYellow) { _gameLogic.CurrentPoint.YellowPlayersInZone.Add(GamePage.Player); }
                         if (GamePage.Player.Team is Teams.TeamRed) { _gameLogic.CurrentPoint.RedPlayersInZone.Add(GamePage.Player); }
+                        GamePage.Player.IsInGeofence = true;
                     }
                     else if (state == GeofenceState.Exited)
                     {
@@ -115,6 +116,7 @@ namespace Turf_Wars
                         if (GamePage.Player.Team is Teams.TeamBlue) { _gameLogic.CurrentPoint.BluePlayersInZone.Remove(GamePage.Player); }
                         if (GamePage.Player.Team is Teams.TeamYellow) { _gameLogic.CurrentPoint.YellowPlayersInZone.Remove(GamePage.Player); }
                         if (GamePage.Player.Team is Teams.TeamRed) { _gameLogic.CurrentPoint.RedPlayersInZone.Remove(GamePage.Player); }
+                        GamePage.Player.IsInGeofence = false;
                     }
                 }
             });
