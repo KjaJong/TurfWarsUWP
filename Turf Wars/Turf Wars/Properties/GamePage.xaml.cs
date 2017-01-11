@@ -34,6 +34,9 @@ namespace Turf_Wars.Pages
             this.InitializeComponent();
             DataContext = this;
 
+            var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+            localSettings.Values["FirstTime"] = false;
+
             MyFrame.Navigate(typeof(MapPage));
             WelcomeBlock.Text = $"Welcome {Player.Name}";
 
