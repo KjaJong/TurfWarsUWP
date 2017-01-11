@@ -99,7 +99,7 @@ namespace Turf_Wars
         #region Timer shenennigans. Contains all the tick events, so to speak (they aren't ticks)
         private async void TickFuckingTock(object state)
         {
-            await Window.Current.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+            await Window.Current.Content.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
             () =>
             {
                 _fightTimer.Dispose();
@@ -110,7 +110,7 @@ namespace Turf_Wars
 
         private async void DistibruteTerritory(object state)
         {
-            await Window.Current.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+            await Window.Current.Content.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
                 () =>
                 {
                     int redScore;
@@ -127,7 +127,7 @@ namespace Turf_Wars
 
         private async void Fight(object state)
         {
-            await Window.Current.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+            await Window.Current.Content.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
             () =>
             {
                 int redScore;
