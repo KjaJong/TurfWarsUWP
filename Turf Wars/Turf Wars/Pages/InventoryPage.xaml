@@ -92,11 +92,17 @@
                        Grid.ColumnSpan="2"
                        Grid.Column="1"/>
 
-            <ListView Grid.ColumnSpan="2" Margin="8,0,0,20" ItemsSource="{x:Bind _powerUps}" Grid.Column="1" Grid.Row="7" SelectionChanged="Selector_OnSelectionChanged">
+            <ListView Name="MyListView" Grid.ColumnSpan="2" Margin="8,0,0,20" ItemsSource="{x:Bind _powerUps}" Grid.Column="1" Grid.Row="7" SelectionChanged="Selector_OnSelectionChanged">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Name}"
-                                   FontSize="18"/>
+                        <StackPanel Orientation="Horizontal">
+
+                            <TextBlock Text="{Binding Name}"
+                                       FontSize="18"/>
+                            <TextBlock Text="{Binding TimeLeft, Mode=TwoWay}"
+                                       FontSize="18"
+                                       Margin="20,0,0,0"/>
+                        </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
