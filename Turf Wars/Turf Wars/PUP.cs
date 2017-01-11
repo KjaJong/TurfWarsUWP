@@ -99,7 +99,7 @@ namespace Turf_Wars
         #region Timer shenennigans. Contains all the tick events, so to speak (they aren't ticks)
         private async void TickFuckingTock(object state)
         {
-            await Window.Current.CoreWindow.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal,
+            await Window.Current.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
             () =>
             {
                 _fightTimer.Dispose();
@@ -110,42 +110,144 @@ namespace Turf_Wars
 
         private async void DistibruteTerritory(object state)
         {
-            await Window.Current.CoreWindow.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal,
-            () =>
-            {
-                if (BlueScore >= YellowScore && BlueScore >= RedScore) BlueScore++;
-                if (YellowScore >= BlueScore && YellowScore >= RedScore) YellowScore++;
-                if (RedScore >= YellowScore && RedScore >= BlueScore) RedScore++;
-            });
-        }
+            await Window.Current.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                () =>
+                {
+                    int redScore;
+                    int blueScore;
+                    int yellowScore;
+
+                    CalcBonus(out redScore, out blueScore, out yellowScore);
+
+                    if (blueScore >= yellowScore && blueScore >= redScore) BlueScore++;
+                    if (yellowScore >= blueScore && yellowScore >= redScore) YellowScore++;
+                    if (redScore >= yellowScore && redScore >= blueScore) RedScore++;
+                });
+            }
 
         private async void Fight(object state)
         {
-            await Window.Current.CoreWindow.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal,
+            await Window.Current.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
             () =>
             {
-                if (Math.Max(BluePlayersInZone.Count, RedPlayersInZone.Count) == BluePlayersInZone.Count &&
-                Math.Max(BluePlayersInZone.Count, YellowPlayersInZone.Count) == BluePlayersInZone.Count)
+                int redScore;
+                int blueScore;
+                int yellowScore;
+
+                CalcBonus(out redScore, out blueScore, out yellowScore);
+
+                if (Math.Max(blueScore, redScore) == blueScore &&
+                Math.Max(blueScore, yellowScore) == blueScore)
                 {
-                    BlueScore += 2 * BluePlayersInZone.Count;
-                    RedScore -= BluePlayersInZone.Count;
-                    YellowScore -= BluePlayersInZone.Count;
+                    BlueScore += 2 * blueScore;
+                    RedScore -= blueScore;
+                    YellowScore -= blueScore;
                 }
-                else if (Math.Max(YellowPlayersInZone.Count, RedPlayersInZone.Count) == YellowPlayersInZone.Count &&
-                         Math.Max(YellowPlayersInZone.Count, BluePlayersInZone.Count) == YellowPlayersInZone.Count)
+                else if (Math.Max(yellowScore, redScore) == yellowScore &&
+                         Math.Max(yellowScore, blueScore) == yellowScore)
                 {
-                    YellowScore += 2 * YellowPlayersInZone.Count;
-                    RedScore -= YellowPlayersInZone.Count;
-                    BlueScore -= YellowPlayersInZone.Count;
+                    YellowScore += 2 * yellowScore;
+                    RedScore -= yellowScore;
+                    BlueScore -= yellowScore;
                 }
-                else if (Math.Max(RedPlayersInZone.Count, BluePlayersInZone.Count) == RedPlayersInZone.Count &&
-                         Math.Max(RedPlayersInZone.Count, YellowPlayersInZone.Count) == RedPlayersInZone.Count)
+                else if (Math.Max(redScore, blueScore) == redScore &&
+                         Math.Max(redScore, yellowScore) == redScore)
                 {
-                    RedScore += 2 * RedPlayersInZone.Count;
-                    BlueScore -= RedPlayersInZone.Count;
-                    YellowScore -= RedPlayersInZone.Count;
+                    RedScore += 2 * redScore;
+                    BlueScore -= redScore;
+                    YellowScore -= redScore;
                 }
             });
+        }
+
+        private void CalcBonus(out int tempRed , out int tempBlue , out int tempYellow )
+        {
+            tempBlue = BluePlayersInZone.Count;
+            tempRed = RedPlayersInZone.Count;
+            tempYellow = YellowPlayersInZone.Count;
+
+            int blueBonus = 0;
+            int redBonus = 0;
+            int yellowBonus = 0;
+
+            #region Logic hell for bonus things
+
+            foreach (Player pr in RedPlayersInZone)
+            {
+                foreach (Powers.PowerUp ap in pr.Powers)
+                {
+                    switch (ap.PowerUpType)
+                    {
+                        case Powers.PowerUp.PowerUps.Attacker:
+                            if (ap.Active)
+                            {
+                                redBonus++;
+                            }
+                            break;
+
+                        case Powers.PowerUp.PowerUps.Tank:
+                            if (ap.Active)
+                            {
+                                blueBonus--;
+                                yellowBonus--;
+                            }
+                            break;
+                    }
+                }
+            }
+
+            foreach (Player pb in BluePlayersInZone)
+            {
+                foreach (Powers.PowerUp ap in pb.Powers)
+                {
+                    switch (ap.PowerUpType)
+                    {
+                        case Powers.PowerUp.PowerUps.Attacker:
+                            if (ap.Active)
+                            {
+                                blueBonus++;
+                            }
+                            break;
+
+                        case Powers.PowerUp.PowerUps.Tank:
+                            if (ap.Active)
+                            {
+                                redBonus--;
+                                yellowBonus--;
+                            }
+                            break;
+                    }
+                }
+            }
+
+            foreach (Player py in YellowPlayersInZone)
+            {
+                foreach (Powers.PowerUp ap in py.Powers)
+                {
+                    switch (ap.PowerUpType)
+                    {
+                        case Powers.PowerUp.PowerUps.Attacker:
+                            if (ap.Active)
+                            {
+                                yellowBonus++;
+                            }
+                            break;
+
+                        case Powers.PowerUp.PowerUps.Tank:
+                            if (ap.Active)
+                            {
+                                redBonus--;
+                                blueBonus--;
+                            }
+                            break;
+                    }
+                }
+
+                tempRed += redBonus;
+                tempBlue += blueBonus;
+                tempYellow += yellowBonus;
+            }
+            #endregion
         }
         #endregion
     }
