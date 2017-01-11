@@ -88,11 +88,9 @@ namespace Turf_Wars
 
         public async void OnGeofenceStateChangedAsync(GeofenceMonitor sender, object e)
         {
-            var reports = sender.ReadReports();
-
             await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
             {
-                foreach (var report in reports)
+                foreach (var report in sender.ReadReports())
                 {
                     var state = report.NewState;
 

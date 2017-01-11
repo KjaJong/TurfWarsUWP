@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using System.Threading;
+using System.Threading.Tasks;
 using Windows.Devices.Geolocation.Geofencing;
 using Windows.Foundation;
 using Windows.UI.Core;
@@ -23,9 +25,21 @@ namespace Turf_Wars
         public List<Player> BluePlayersInZone;
 
         private readonly CapturePoint _currentPoint;
-        private readonly DispatcherTimer _timer;
-        private bool _gateKeeper = true;
+        private readonly Timer _timer;
+        private readonly Timer _territoryTimer;
+        private readonly Timer _fightTimer;
+
+        private readonly ManualResetEvent _timerEvent = new ManualResetEvent(false);
         //private readonly GeoLocation location { get;}
+
+        void TerritoryTask()
+        {
+            _territoryTimer.Change(TimeSpan.FromSeconds(1).Milliseconds,
+                Timeout.Infinite);
+            //TODO if this fucks up change this shit
+            while (BlueScore + YellowScore + RedScore < _currentPoint.Reward) {Task.Delay(250);}
+            _timerEvent.Set();
+        }
 
         public Pup(CapturePoint c)
         {
@@ -34,16 +48,10 @@ namespace Turf_Wars
             BluePlayersInZone = new List<Player>();
             _currentPoint = c;
 
-            _timer = new DispatcherTimer();
-            _timer.Interval = TimeSpan.FromMinutes(5);
-
-            _timer.Tick += (sender, args) =>
-            {
-                _timer.Stop();
-                AwardMoneyAndExp();
-                _gateKeeper = false;
-            };
-
+            //So you can't start or stop this thing (explains why I loved the other timer). This is wonky but should do the trick.
+            _timer = new Timer(TickFuckingTock, null, Timeout.Infinite, Timeout.Infinite);
+            _territoryTimer = new Timer(DistibruteTerritory, null, Timeout.Infinite, Timeout.Infinite);
+            _fightTimer = new Timer(Fight, null, Timeout.Infinite, Timeout.Infinite);
             StartCapture();
         }
 
@@ -52,59 +60,16 @@ namespace Turf_Wars
         /// </summary>
         private void StartCapture()
         {
-            _timer.Start();
+            _timer.Change(TimeSpan.FromMinutes(5), Timeout.InfiniteTimeSpan);
 
-            while (_gateKeeper && (BlueScore + YellowScore + RedScore <= _currentPoint.Reward))
-            {
-                DispatcherTimer pointsCheck = new DispatcherTimer();
-                pointsCheck.Interval = new TimeSpan(0, 0, 1);
+            Task territoryTimerTask = new Task(TerritoryTask);
+            territoryTimerTask.Start();
 
-                pointsCheck.Tick += (sender, args) =>
-                {
-                    if (BlueScore >= YellowScore && BlueScore >= RedScore) BlueScore++;
-                    if (YellowScore >= BlueScore && YellowScore >= RedScore) YellowScore++;
-                    if (RedScore >= YellowScore && RedScore >= BlueScore) RedScore++;
-                };
-            }
+            _timerEvent.WaitOne();
+            _timerEvent.Reset();
 
-            while (_gateKeeper)
-            {
-                DispatcherTimer rewardTimer = new DispatcherTimer();
-                rewardTimer.Interval = new TimeSpan(0, 0, 5);
-
-                while (Math.Max(BluePlayersInZone.Count, RedPlayersInZone.Count) == BluePlayersInZone.Count &&
-                       Math.Max(BluePlayersInZone.Count, YellowPlayersInZone.Count) == BluePlayersInZone.Count)
-                {
-                    rewardTimer.Tick += (sender, args) =>
-                    {
-                        BlueScore += 2*BluePlayersInZone.Count;
-                        RedScore -= BluePlayersInZone.Count;
-                        YellowScore -= BluePlayersInZone.Count;
-                    };
-                }
-
-                while (Math.Max(YellowPlayersInZone.Count, RedPlayersInZone.Count) == YellowPlayersInZone.Count &&
-                       Math.Max(YellowPlayersInZone.Count, BluePlayersInZone.Count) == YellowPlayersInZone.Count)
-                {
-                    rewardTimer.Tick += (sender, args) =>
-                    {
-                        YellowScore += 2 * YellowPlayersInZone.Count;
-                        RedScore -= YellowPlayersInZone.Count;
-                        BlueScore -= YellowPlayersInZone.Count;
-                    };
-                }
-
-                while (Math.Max(RedPlayersInZone.Count, BluePlayersInZone.Count) == RedPlayersInZone.Count &&
-                       Math.Max(RedPlayersInZone.Count, YellowPlayersInZone.Count) == RedPlayersInZone.Count)
-                {
-                    rewardTimer.Tick += (sender, args) =>
-                    {
-                        RedScore += 2 * RedPlayersInZone.Count;
-                        BlueScore -= RedPlayersInZone.Count;
-                        YellowScore -= RedPlayersInZone.Count;
-                    };
-                }
-            }
+            _territoryTimer.Dispose();
+            _fightTimer.Change(TimeSpan.FromSeconds(5).Milliseconds, Timeout.Infinite);
         }
 
         /// <summary>
@@ -130,5 +95,58 @@ namespace Turf_Wars
                 p.AddExperience(YellowScore);
             }
         }
+
+        #region Timer shenennigans. Contains all the tick events, so to speak (they aren't ticks)
+        private async void TickFuckingTock(object state)
+        {
+            await Window.Current.CoreWindow.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal,
+            () =>
+            {
+                _fightTimer.Dispose();
+                AwardMoneyAndExp();
+                _timer.Dispose();
+            });
+        }
+
+        private async void DistibruteTerritory(object state)
+        {
+            await Window.Current.CoreWindow.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal,
+            () =>
+            {
+                if (BlueScore >= YellowScore && BlueScore >= RedScore) BlueScore++;
+                if (YellowScore >= BlueScore && YellowScore >= RedScore) YellowScore++;
+                if (RedScore >= YellowScore && RedScore >= BlueScore) RedScore++;
+            });
+        }
+
+        private async void Fight(object state)
+        {
+            await Window.Current.CoreWindow.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal,
+            () =>
+            {
+                if (Math.Max(BluePlayersInZone.Count, RedPlayersInZone.Count) == BluePlayersInZone.Count &&
+                Math.Max(BluePlayersInZone.Count, YellowPlayersInZone.Count) == BluePlayersInZone.Count)
+                {
+                    BlueScore += 2 * BluePlayersInZone.Count;
+                    RedScore -= BluePlayersInZone.Count;
+                    YellowScore -= BluePlayersInZone.Count;
+                }
+                else if (Math.Max(YellowPlayersInZone.Count, RedPlayersInZone.Count) == YellowPlayersInZone.Count &&
+                         Math.Max(YellowPlayersInZone.Count, BluePlayersInZone.Count) == YellowPlayersInZone.Count)
+                {
+                    YellowScore += 2 * YellowPlayersInZone.Count;
+                    RedScore -= YellowPlayersInZone.Count;
+                    BlueScore -= YellowPlayersInZone.Count;
+                }
+                else if (Math.Max(RedPlayersInZone.Count, BluePlayersInZone.Count) == RedPlayersInZone.Count &&
+                         Math.Max(RedPlayersInZone.Count, YellowPlayersInZone.Count) == RedPlayersInZone.Count)
+                {
+                    RedScore += 2 * RedPlayersInZone.Count;
+                    BlueScore -= RedPlayersInZone.Count;
+                    YellowScore -= RedPlayersInZone.Count;
+                }
+            });
+        }
+        #endregion
     }
 }

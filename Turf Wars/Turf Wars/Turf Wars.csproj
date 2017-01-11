@@ -141,11 +141,11 @@
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Pup.cs" />
-    <Compile Include="Teams\NoTeam.cs" />
-    <Compile Include="Teams\Team.cs" />
-    <Compile Include="Teams\TeamBlue.cs" />
-    <Compile Include="Teams\TeamRed.cs" />
-    <Compile Include="Teams\TeamYellow.cs" />
+    <Compile Include="Powers\Teams\NoTeam.cs" />
+    <Compile Include="Powers\Teams\Team.cs" />
+    <Compile Include="Powers\Teams\TeamBlue.cs" />
+    <Compile Include="Powers\Teams\TeamRed.cs" />
+    <Compile Include="Powers\Teams\TeamYellow.cs" />
     <Compile Include="TestDriverMapCommanderAndSuch.cs" />
   </ItemGroup>
   <ItemGroup>
