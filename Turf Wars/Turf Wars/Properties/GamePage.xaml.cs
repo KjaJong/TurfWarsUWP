@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -14,6 +16,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Turf_Wars.Annotations;
 using Turf_Wars.Teams;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
@@ -29,6 +32,7 @@ namespace Turf_Wars.Pages
         public GamePage()
         {
             this.InitializeComponent();
+            DataContext = this;
 
             MyFrame.Navigate(typeof(MapPage));
             WelcomeBlock.Text = $"Welcome {Player.Name}";
@@ -47,8 +51,6 @@ namespace Turf_Wars.Pages
             {
                 MyGrid.Background = new SolidColorBrush(Colors.Gold);
             }
-
-            Coins.Text = Player.Coinz.ToString();
         }
 
 
