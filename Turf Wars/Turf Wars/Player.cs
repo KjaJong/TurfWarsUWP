@@ -18,6 +18,7 @@ namespace Turf_Wars
 
         public int Experience;
         public double ExpToNextLvl;
+        public bool IsInGeofence;
 
         public ObservableCollection<PowerUp> Powers;
         public BasicGeoposition Geoposition { get; set; }

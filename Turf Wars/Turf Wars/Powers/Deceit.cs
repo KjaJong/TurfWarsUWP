@@ -1,4 +1,5 @@
 ﻿using System;
+using Turf_Wars.Pages;
 
 namespace Turf_Wars.Powers
 {
@@ -13,6 +14,7 @@ namespace Turf_Wars.Powers
         }
         public override void Activate()
         {
+            if (!GamePage.Player.IsInGeofence) return;
             throw new System.NotImplementedException();
         }
 
