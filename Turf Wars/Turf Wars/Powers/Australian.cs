@@ -16,13 +16,6 @@ namespace Turf_Wars.Powers
 
         public override void Activate()
         {
-            if (!GamePage.Player.IsInGeofence) return;
-            Active = true;
-            throw new System.NotImplementedException();
-        }
-
-        public override void Activate()
-        {
             if (Active) return;
 
             Active = true;

@@ -36,7 +36,7 @@ namespace Turf_Wars
             Experience = 0;
             ExpToNextLvl = 100;
 
-            Team = new NoTeam(0);
+            Team = new NoTeam();
             Powers = new ObservableCollection<PowerUp>();
         }
 
