@@ -4,7 +4,7 @@ namespace Turf_Wars.Teams
 {
     public class TeamBlue : Team
     {
-        public TeamBlue(int totalPoints) : base(totalPoints)
+        public TeamBlue()
         {
             Name = "Blue team";
         }

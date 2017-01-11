@@ -27,7 +27,7 @@ namespace Turf_Wars.Pages
         public MapPage()
         {
             this.InitializeComponent();
-            TestDriverMapCommanderAndSuch.TestAll(TurfWarsMapControl);
+            //TestDriverMapCommanderAndSuch.TestAll(TurfWarsMapControl);
         }
     }
 }

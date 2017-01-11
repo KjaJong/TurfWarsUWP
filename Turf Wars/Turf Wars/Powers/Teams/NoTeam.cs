@@ -8,7 +8,7 @@ namespace Turf_Wars.Teams
 {
     class NoTeam : Team
     {
-        public NoTeam(int totalPoints) : base(totalPoints)
+        public NoTeam()
         {
             Name = "No team";
         }

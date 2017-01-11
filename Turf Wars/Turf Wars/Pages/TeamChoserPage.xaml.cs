@@ -36,13 +36,13 @@ namespace Turf_Wars.Pages
             switch (button.Name.ToLower())
             {
                 case "red":
-                    _player.Team = new TeamRed(0);
+                    _player.Team = new TeamRed();
                     break;
                 case "blueton":
-                    _player.Team = new TeamBlue(0);
+                    _player.Team = new TeamBlue();
                     break;
                 case "yellowbutton":
-                    _player.Team = new TeamYellow(0);
+                    _player.Team = new TeamYellow();
                     break;
 
             }

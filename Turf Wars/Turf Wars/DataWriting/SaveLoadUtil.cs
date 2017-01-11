@@ -64,10 +64,10 @@ namespace Turf_Wars.DataWriting
                 }
 
                 Team team = null;
-                if (playerNames[7].Equals("No team")) team = new NoTeam(0);
-                if (playerNames[7].Equals("Blue team")) team = new TeamBlue(0);
-                if (playerNames[7].Equals("Red team")) team = new TeamRed(0);
-                if (playerNames[7].Equals("Yellow team")) team = new TeamYellow(0);
+                if (playerNames[7].Equals("No team")) team = new NoTeam();
+                if (playerNames[7].Equals("Blue team")) team = new TeamBlue();
+                if (playerNames[7].Equals("Red team")) team = new TeamRed();
+                if (playerNames[7].Equals("Yellow team")) team = new TeamYellow();
 
                 var powerUps = new ObservableCollection<PowerUp>();
 
