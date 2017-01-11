@@ -75,7 +75,7 @@ namespace Turf_Wars.Pages
             var obj = (ListView) sender;
             var item = (PowerUp) obj.SelectedItem;
 
-            //item?.Activate();
+            item?.Activate();
         }
     }
 }
