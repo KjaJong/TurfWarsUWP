@@ -46,7 +46,7 @@ namespace Turf_Wars
                 Debug.WriteLine(g.Id);
             }
         }
-
+        //fenceId, new Geocircle(p.Position, radius), states, false, t)
         /// <summary>
         /// Creates a map icon on a point
         /// </summary>
@@ -124,6 +124,12 @@ namespace Turf_Wars
         {
             var access = await Geolocator.RequestAccessAsync();
             access = GeolocationAccessStatus.Allowed;
+        }
+
+        public void RemoveCurrentPoint(Pup p, Geofence g)
+        {
+            _gameLogic.CleanFromList(p);
+            GeofenceMonitor.Current.Geofences.Remove(g);
         }
     }
 }

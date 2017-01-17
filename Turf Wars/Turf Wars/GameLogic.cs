@@ -47,6 +47,11 @@ namespace Turf_Wars
                 new Tank(20, "Combine this with a medic (We don't have one, though)")
             };
         }
+
+        public void CleanFromList(Pup p)
+        {
+            _points.Remove(p);
+        }
     }
 
     public class CapturePoint
