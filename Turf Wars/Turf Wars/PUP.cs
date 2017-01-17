@@ -146,7 +146,7 @@ namespace Turf_Wars
                     if (RedScore + BlueScore + YellowScore <= _currentPoint.Reward)
                     {
                         _gatekeeper = true;
-                        _fightTimer.Change(TimeSpan.FromSeconds(5).Milliseconds,
+                        _fightTimer.Change(TimeSpan.Zero.Milliseconds,
                             TimeSpan.FromSeconds(5).Milliseconds);
                     }
                 }
