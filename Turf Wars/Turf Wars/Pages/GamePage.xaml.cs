@@ -36,6 +36,7 @@ namespace Turf_Wars.Pages
 
             var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
             localSettings.Values["FirstTime"] = false;
+            if (localSettings.Values["LastOnline"] == null) localSettings.Values["LastOnline"] = Player.Name;
 
             MyFrame.Navigate(typeof(MapPage));
             WelcomeBlock.Text = $"Welcome {Player.Name}";
