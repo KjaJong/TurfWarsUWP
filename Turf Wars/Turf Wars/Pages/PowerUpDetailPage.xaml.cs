@@ -36,7 +36,6 @@ namespace Turf_Wars.Pages
                 MyGrid.Background = new SolidColorBrush(Colors.Aqua);
                 BackButton.Background = new SolidColorBrush(Colors.Aqua);
                 BuyButton.Background = new SolidColorBrush(Colors.Aqua);
-
             }
 
             if (GamePage.Player.Team is TeamRed)

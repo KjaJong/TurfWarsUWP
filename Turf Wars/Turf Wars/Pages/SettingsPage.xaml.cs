@@ -25,8 +25,7 @@ namespace Turf_Wars.Pages
     /// </summary>
     public sealed partial class SettingsPage : Page
     {
-        private bool _isLogOut;
-        private ContentDialog _youSure;
+        private readonly ContentDialog _youSure;
         public SettingsPage()
         {
             this.InitializeComponent();
