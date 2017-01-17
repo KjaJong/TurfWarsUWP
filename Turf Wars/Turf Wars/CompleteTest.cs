@@ -37,7 +37,7 @@ namespace Turf_Wars
             Geopoint point = new Geopoint(pos);
             Geopoint point2 = new Geopoint(pos2);
 
-            m.CreateGeofence("TestFence 1", point, 20.0, TimeSpan.Zero);
+            m.CreateGeofence("TestFence 1", point, 1000.0, TimeSpan.Zero);
             m.CreateMapIcon("TestPoint 1", point);
             g.AddCapturePoint(point2, 100);
 
