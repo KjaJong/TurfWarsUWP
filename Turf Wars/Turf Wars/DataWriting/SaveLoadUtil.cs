@@ -27,6 +27,7 @@ namespace Turf_Wars.DataWriting
                 await storageFolder.CreateFileAsync($"{player.Name}.txt",
                     Windows.Storage.CreationCollisionOption.ReplaceExisting);
 
+            Debug.WriteLine(player.ToString());
             var names = player.ToString();
 
             foreach (var p in player.Powers)

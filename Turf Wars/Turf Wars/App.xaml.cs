@@ -76,7 +76,7 @@ namespace Turf_Wars
                     // parameter
 
                     //Kills all storage, for reset use only.
-                    SaveLoadUtil.DeleteAllStorage();
+                    //SaveLoadUtil.DeleteAllStorage();
 
                     var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
                     if (localSettings.Values["FirstTime"] == null) localSettings.Values["FirstTime"] = true;
@@ -86,8 +86,12 @@ namespace Turf_Wars
                     if (isFirstTime) rootFrame.Navigate(typeof(MainPage), e.Arguments);
                     else
                     {
-                        var player = await SaveLoadUtil.LoadPlayerNames((string)localSettings.Values["LastOnline"]);
-                        if (player == null) rootFrame.Navigate(typeof(MainPage), e.Arguments);
+                        var name = (string) localSettings.Values["LastOnline"];
+                        var player = await SaveLoadUtil.LoadPlayerNames(name);
+                        if (player == null)
+                        {
+                            rootFrame.Navigate(typeof(MainPage), e.Arguments);
+                        }
 
                         GamePage.Player = player;
                         rootFrame.Navigate(typeof(GamePage), e.Arguments);
@@ -122,8 +126,6 @@ namespace Turf_Wars
 
             if (GamePage.Player != null)
             { 
-               var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
-               if (localSettings.Values["LastOnline"] == null) localSettings.Values["LastOnline"] = GamePage.Player.Name;
                await SaveLoadUtil.SavePlayerNames(GamePage.Player);
             }
             deferral.Complete();
