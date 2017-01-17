@@ -67,50 +67,6 @@
                    Foreground="Red"
                    Style="{StaticResource BlockStyle}"
                    Visibility="Collapsed"/>
-        
-        <Popup Name="ChangeTeamPop"
-               Grid.Row="5"
-               Grid.Column="1"
-               Grid.ColumnSpan="2"
-               HorizontalAlignment="Left">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-               </Grid.RowDefinitions>
-            
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-            
-            <TextBlock Name="YouSureBlock"
-                       Grid.Row="0"
-                       Grid.ColumnSpan="2"
-                       HorizontalAlignment="Center"
-                       Style="{StaticResource BlockStyle}"/>
-            
-            <Button Name="YESYESYESYESYES"
-                    Grid.Row="1"
-                    Grid.Column="0"
-                    Content="Yes"
-                    HorizontalAlignment="Right"
-                    Margin="20"
-                    FontSize="24"
-                    Click="YESYESYESYESYES_OnClick"/>
-
-                <Button Name="NONONONONONO"
-                        Grid.Row="1"
-                        Grid.Column="1"
-                        Content="No"
-                        HorizontalAlignment="Left"
-                        Margin="20"
-                        FontSize="24"
-                        Click="NONONONONONO_OnClick"/>
-            </Grid>
-            
-        </Popup>
-
     </Grid>
 </Page>
 

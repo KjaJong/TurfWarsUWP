@@ -26,56 +26,66 @@ namespace Turf_Wars.Pages
     public sealed partial class SettingsPage : Page
     {
         private bool _isLogOut;
+        private ContentDialog _youSure;
         public SettingsPage()
         {
             this.InitializeComponent();
+            _youSure = new ContentDialog();
+            _youSure.Visibility = Visibility.Collapsed;
+
             if (GamePage.Player.Team is TeamBlue) MyGrid.Background = new SolidColorBrush(Colors.Aqua);
             if (GamePage.Player.Team is TeamRed) MyGrid.Background = new SolidColorBrush(Colors.Coral);
             if (GamePage.Player.Team is TeamYellow) MyGrid.Background = new SolidColorBrush(Colors.Gold);
         }
 
-        private void LogoutButton_OnClick(object sender, RoutedEventArgs e)
+        private async void LogoutButton_OnClick(object sender, RoutedEventArgs e)
         {
-            _isLogOut = true;
-            YouSureBlock.Text = "You sure?";
-            ChangeTeamPop.IsOpen = true;
-        }
+            _youSure.Title = "Logout";
+            _youSure.Content = "You sure you want to logout?";
+            _youSure.IsPrimaryButtonEnabled = true;
+            _youSure.IsSecondaryButtonEnabled = true;
+            _youSure.SecondaryButtonText = "No";
+            _youSure.PrimaryButtonText = "Yes";
+            _youSure.Visibility = Visibility.Visible;
 
-        private void ChangeTeam_OnClick(object sender, RoutedEventArgs e)
-        {
-            _isLogOut = false;
-            YouSureBlock.Text = "Changing teams will cost 1000 coins";
-            ChangeTeamPop.IsOpen = true;
-        }
-
-        private void NONONONONONO_OnClick(object sender, RoutedEventArgs e)
-        {
-            ChangeTeamPop.IsOpen = false;
-        }
-
-        private async void YESYESYESYESYES_OnClick(object sender, RoutedEventArgs e)
-        {
+            var result = await _youSure.ShowAsync();
+            if (result == ContentDialogResult.Secondary) return;
+            
             var window = Window.Current.Content as Frame;
             if (window == null) return;
 
-            if (_isLogOut)
-            {
-                await SaveLoadUtil.SavePlayerNames(GamePage.Player);
-                GameLogic.ResetPowerUps();
-                window.Navigate(typeof(LoginPage));
-            }
+            await SaveLoadUtil.SavePlayerNames(GamePage.Player);
+            GameLogic.ResetPowerUps();
 
-            else
+            var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+            localSettings.Values["FirstTime"] = true;
+
+            window.Navigate(typeof(LoginPage));
+        }
+
+        private async void ChangeTeam_OnClick(object sender, RoutedEventArgs e)
+        {
+            _youSure.Title = "Logout";
+            _youSure.Content = "You sure you want to change teams? It costs 1000 coinz";
+            _youSure.IsPrimaryButtonEnabled = true;
+            _youSure.IsSecondaryButtonEnabled = true;
+            _youSure.SecondaryButtonText = "No";
+            _youSure.PrimaryButtonText = "Yes";
+            _youSure.Visibility = Visibility.Visible;
+
+            var result = await _youSure.ShowAsync();
+            if (result == ContentDialogResult.Secondary) return;
+
+            var window = Window.Current.Content as Frame;
+            if (window == null) return;
+
+            if (GamePage.Player.Coinz < 1000)
             {
-                if (GamePage.Player.Coinz < 1000)
-                {
-                    NotEnoughMunz.Visibility = Visibility.Visible;
-                    ChangeTeamPop.IsOpen = false;
-                    return;
-                }
-                GamePage.Player.Coinz -= 1000;
-                window.Navigate(typeof(TeamChoserPage), GamePage.Player);
+                NotEnoughMunz.Visibility = Visibility.Visible;
+                return;
             }
+            GamePage.Player.Coinz -= 1000;
+            window.Navigate(typeof(TeamChoserPage), GamePage.Player);
         }
     }
 }
