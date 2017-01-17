@@ -87,6 +87,8 @@ namespace Turf_Wars
                     else
                     {
                         var player = await SaveLoadUtil.LoadPlayerNames((string)localSettings.Values["LastOnline"]);
+                        if (player == null) rootFrame.Navigate(typeof(MainPage), e.Arguments);
+
                         GamePage.Player = player;
                         rootFrame.Navigate(typeof(GamePage), e.Arguments);
                     }
