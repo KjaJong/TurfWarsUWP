@@ -51,7 +51,7 @@ namespace Turf_Wars
         /// </summary>
         private void StartCapture()
         {
-            _timer.Change(TimeSpan.Zero, TimeSpan.FromMinutes(5));
+            _timer.Change(TimeSpan.Zero, TimeSpan.FromMinutes(1));
             _fightTimer.Change(TimeSpan.Zero, TimeSpan.FromSeconds(5));
             //waitEvent.WaitOne();
         }
@@ -142,7 +142,7 @@ namespace Turf_Wars
                     if (yellowScore >= blueScore && yellowScore >= redScore) YellowScore++;
                     if (redScore >= yellowScore && redScore >= blueScore) RedScore++;
 
-                    if (RedScore + BlueScore + YellowScore <= _currentPoint.Reward) { _gatekeeper = true; }
+                    if (RedScore + BlueScore + YellowScore >= _currentPoint.Reward) { _gatekeeper = true; }
                 }
             });
         }
