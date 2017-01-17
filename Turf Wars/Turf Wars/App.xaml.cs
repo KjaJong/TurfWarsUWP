@@ -76,7 +76,7 @@ namespace Turf_Wars
                     // parameter
 
                     //Kills all storage, for reset use only.
-                    //SaveLoadUtil.DeleteAllStorage();
+                    SaveLoadUtil.DeleteAllStorage();
 
                     var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
                     if (localSettings.Values["FirstTime"] == null) localSettings.Values["FirstTime"] = true;
