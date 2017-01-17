@@ -32,9 +32,6 @@ namespace Turf_Wars
         {
             this.InitializeComponent();
 
-            //Kills all storage, for reset use only.
-            SaveLoadUtil.DeleteAllStorage();
-
             MyFrame.Navigate(typeof(LoginPage));
         }
     }

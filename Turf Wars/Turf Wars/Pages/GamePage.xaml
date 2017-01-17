@@ -35,7 +35,11 @@
                        RelativePanel.RightOf="Hamburger"/>
             <TextBlock Name="Coins"
                        FontSize="20"
-                       RelativePanel.AlignRightWithPanel="True"/>
+                       RelativePanel.AlignRightWithPanel="True" d:DataContext="{d:DesignData }">
+                <TextBlock.Text>
+                    <Binding Path="Player.Coinz" />
+                </TextBlock.Text>
+            </TextBlock>
             <TextBlock RelativePanel.LeftOf="Coins"
                        FontSize="20"
                        Margin="0,0,4,0"

@@ -39,7 +39,7 @@ namespace Turf_Wars
         /// will be used such as when the application is launched to open a specific file.
         /// </summary>
         /// <param name="e">Details about the launch request and process.</param>
-        protected override void OnLaunched(LaunchActivatedEventArgs e)
+        protected override async void OnLaunched(LaunchActivatedEventArgs e)
         {
 #if DEBUG
             if (System.Diagnostics.Debugger.IsAttached)
@@ -74,7 +74,22 @@ namespace Turf_Wars
                     // When the navigation stack isn't restored navigate to the first page,
                     // configuring the new page by passing required information as a navigation
                     // parameter
-                    rootFrame.Navigate(typeof(MainPage), e.Arguments);
+
+                    //Kills all storage, for reset use only.
+                    //SaveLoadUtil.DeleteAllStorage();
+
+                    var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+                    if (localSettings.Values["FirstTime"] == null) localSettings.Values["FirstTime"] = true;
+
+                    var isFirstTime = (bool)localSettings.Values["FirstTime"];
+
+                    if (isFirstTime) rootFrame.Navigate(typeof(MainPage), e.Arguments);
+                    else
+                    {
+                        var player = await SaveLoadUtil.LoadPlayerNames((string)localSettings.Values["LastOnline"]);
+                        GamePage.Player = player;
+                        rootFrame.Navigate(typeof(GamePage), e.Arguments);
+                    }
                 }
                 // Ensure the current window is active
                 Window.Current.Activate();
@@ -102,8 +117,11 @@ namespace Turf_Wars
         {
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Save application state and stop any background activity
+
             if (GamePage.Player != null)
-            {
+            { 
+               var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+               if (localSettings.Values["LastOnline"] == null) localSettings.Values["LastOnline"] = GamePage.Player.Name;
                await SaveLoadUtil.SavePlayerNames(GamePage.Player);
             }
             deferral.Complete();
