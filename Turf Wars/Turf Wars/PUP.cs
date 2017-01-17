@@ -143,12 +143,11 @@ namespace Turf_Wars
                     if (yellowScore >= blueScore && yellowScore >= redScore) YellowScore++;
                     if (redScore >= yellowScore && redScore >= blueScore) RedScore++;
 
-                    if (RedScore + BlueScore + YellowScore <= _currentPoint.Reward)
-                    {
-                        _gatekeeper = true;
-                        _fightTimer.Change(TimeSpan.FromSeconds(5).Milliseconds,
-                            TimeSpan.FromSeconds(5).Milliseconds);
-                    }
+                    if (RedScore + BlueScore + YellowScore < _currentPoint.Reward) return;
+
+                    _gatekeeper = true;
+                    _fightTimer.Change(TimeSpan.FromSeconds(5).Milliseconds,
+                        TimeSpan.FromSeconds(5).Milliseconds);
                 }
             });
         }

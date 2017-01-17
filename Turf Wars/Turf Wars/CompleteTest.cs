@@ -39,7 +39,7 @@ namespace Turf_Wars
 
             m.CreateGeofence("TestFence 1", point, 20.0, TimeSpan.Zero);
             m.CreateMapIcon("TestPoint 1", point);
-            g.AddCapturePoint(point2, 100);
+            g.AddCapturePoint(point2, 5);
 
             Debug.WriteLine("Everything has been intialized. Starting the s̶t̶a̶l̶k̶i̶n̶g̶  monitoring of senpai and the geofence (*^^*)");
         }
