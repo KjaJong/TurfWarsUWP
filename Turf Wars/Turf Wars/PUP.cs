@@ -29,17 +29,7 @@ namespace Turf_Wars
         private readonly Timer _territoryTimer;
         private readonly Timer _fightTimer;
 
-        private readonly ManualResetEvent _timerEvent = new ManualResetEvent(false);
         //private readonly GeoLocation location { get;}
-
-        void TerritoryTask()
-        {
-            _territoryTimer.Change(TimeSpan.FromSeconds(1).Milliseconds,
-                Timeout.Infinite);
-            //TODO if this fucks up change this shit
-            while (BlueScore + YellowScore + RedScore < _currentPoint.Reward) {Task.Delay(250);}
-            _timerEvent.Set();
-        }
 
         public Pup(CapturePoint c)
         {
@@ -62,11 +52,10 @@ namespace Turf_Wars
         {
             _timer.Change(TimeSpan.FromMinutes(5), Timeout.InfiniteTimeSpan);
 
-            Task territoryTimerTask = new Task(TerritoryTask);
-            territoryTimerTask.Start();
-
-            _timerEvent.WaitOne();
-            _timerEvent.Reset();
+            _territoryTimer.Change(TimeSpan.FromSeconds(1).Milliseconds,
+                Timeout.Infinite);
+            //TODO if this fucks up change this shit
+            while (BlueScore + YellowScore + RedScore < _currentPoint.Reward) { Task.Delay(250); }
 
             _territoryTimer.Dispose();
             _fightTimer.Change(TimeSpan.FromSeconds(5).Milliseconds, Timeout.Infinite);
