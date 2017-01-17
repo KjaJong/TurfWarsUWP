@@ -67,7 +67,7 @@ namespace Turf_Wars
             _controller.Center = g;
         }
 
-        public async Task InitializeBingMapsAsync()
+        public void InitializeBingMapsAsync()
         {
             // Clear the geofence and add the trigger method
             GeofenceMonitor.Current.Geofences.Clear();
@@ -124,11 +124,6 @@ namespace Turf_Wars
         {
             var access = await Geolocator.RequestAccessAsync();
             access = GeolocationAccessStatus.Allowed;
-        }
-
-        private async void reloadMap(Geopoint g)
-        {
-            //await _controller.TrySetViewBoundsAsync();
         }
     }
 }

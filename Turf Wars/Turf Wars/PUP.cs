@@ -20,13 +20,15 @@ namespace Turf_Wars
         private int BlueScore { get; set; }
         private int YellowScore { get; set; }
 
+        private bool _gatekeeper;
+        //private AutoResetEvent waitEvent = new AutoResetEvent(false);
+
         public List<Player> RedPlayersInZone;
         public List<Player> YellowPlayersInZone;
         public List<Player> BluePlayersInZone;
 
         private readonly CapturePoint _currentPoint;
         private readonly Timer _timer;
-        private readonly Timer _territoryTimer;
         private readonly Timer _fightTimer;
 
         //private readonly GeoLocation location { get;}
@@ -40,7 +42,6 @@ namespace Turf_Wars
 
             //So you can't start or stop this thing (explains why I loved the other timer). This is wonky but should do the trick.
             _timer = new Timer(TickFuckingTock, null, Timeout.Infinite, Timeout.Infinite);
-            _territoryTimer = new Timer(DistibruteTerritory, null, Timeout.Infinite, Timeout.Infinite);
             _fightTimer = new Timer(Fight, null, Timeout.Infinite, Timeout.Infinite);
             StartCapture();
         }
@@ -51,14 +52,9 @@ namespace Turf_Wars
         private void StartCapture()
         {
             _timer.Change(TimeSpan.FromMinutes(5), Timeout.InfiniteTimeSpan);
-
-            _territoryTimer.Change(TimeSpan.FromSeconds(1).Milliseconds,
-                Timeout.Infinite);
-            //TODO if this fucks up change this shit
-            while (BlueScore + YellowScore + RedScore < _currentPoint.Reward) { Task.Delay(250); }
-
-            _territoryTimer.Dispose();
-            _fightTimer.Change(TimeSpan.FromSeconds(5).Milliseconds, Timeout.Infinite);
+            _fightTimer.Change(TimeSpan.FromSeconds(1).Milliseconds,
+                TimeSpan.FromSeconds(1).Milliseconds);
+            //waitEvent.WaitOne();
         }
 
         /// <summary>
@@ -88,19 +84,54 @@ namespace Turf_Wars
         #region Timer shenennigans. Contains all the tick events, so to speak (they aren't ticks)
         private async void TickFuckingTock(object state)
         {
-            await Window.Current.Content.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+            await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
+                  CoreDispatcherPriority.Normal,
             () =>
             {
                 _fightTimer.Dispose();
                 AwardMoneyAndExp();
+                //waitEvent.Set();
                 _timer.Dispose();
             });
         }
 
-        private async void DistibruteTerritory(object state)
+        private async void Fight(object state)
         {
-            await Window.Current.Content.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
-                () =>
+            await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
+                  CoreDispatcherPriority.Normal,
+            () =>
+            {
+                if (_gatekeeper) //is true when all points in the reward are spend
+                {
+                    int redScore;
+                    int blueScore;
+                    int yellowScore;
+
+                    CalcBonus(out redScore, out blueScore, out yellowScore);
+
+                    if (Math.Max(blueScore, redScore) == blueScore &&
+                    Math.Max(blueScore, yellowScore) == blueScore)
+                    {
+                        BlueScore += 2 * blueScore;
+                        RedScore -= blueScore;
+                        YellowScore -= blueScore;
+                    }
+                    else if (Math.Max(yellowScore, redScore) == yellowScore &&
+                             Math.Max(yellowScore, blueScore) == yellowScore)
+                    {
+                        YellowScore += 2 * yellowScore;
+                        RedScore -= yellowScore;
+                        BlueScore -= yellowScore;
+                    }
+                    else if (Math.Max(redScore, blueScore) == redScore &&
+                             Math.Max(redScore, yellowScore) == redScore)
+                    {
+                        RedScore += 2 * redScore;
+                        BlueScore -= redScore;
+                        YellowScore -= redScore;
+                    }
+                }
+                else
                 {
                     int redScore;
                     int blueScore;
@@ -111,40 +142,13 @@ namespace Turf_Wars
                     if (blueScore >= yellowScore && blueScore >= redScore) BlueScore++;
                     if (yellowScore >= blueScore && yellowScore >= redScore) YellowScore++;
                     if (redScore >= yellowScore && redScore >= blueScore) RedScore++;
-                });
-            }
 
-        private async void Fight(object state)
-        {
-            await Window.Current.Content.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
-            () =>
-            {
-                int redScore;
-                int blueScore;
-                int yellowScore;
-
-                CalcBonus(out redScore, out blueScore, out yellowScore);
-
-                if (Math.Max(blueScore, redScore) == blueScore &&
-                Math.Max(blueScore, yellowScore) == blueScore)
-                {
-                    BlueScore += 2 * blueScore;
-                    RedScore -= blueScore;
-                    YellowScore -= blueScore;
-                }
-                else if (Math.Max(yellowScore, redScore) == yellowScore &&
-                         Math.Max(yellowScore, blueScore) == yellowScore)
-                {
-                    YellowScore += 2 * yellowScore;
-                    RedScore -= yellowScore;
-                    BlueScore -= yellowScore;
-                }
-                else if (Math.Max(redScore, blueScore) == redScore &&
-                         Math.Max(redScore, yellowScore) == redScore)
-                {
-                    RedScore += 2 * redScore;
-                    BlueScore -= redScore;
-                    YellowScore -= redScore;
+                    if (RedScore + BlueScore + YellowScore <= _currentPoint.Reward)
+                    {
+                        _gatekeeper = true;
+                        _fightTimer.Change(TimeSpan.FromSeconds(5).Milliseconds,
+                            TimeSpan.FromSeconds(5).Milliseconds);
+                    }
                 }
             });
         }

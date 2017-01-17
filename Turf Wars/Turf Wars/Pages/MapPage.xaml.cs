@@ -33,7 +33,7 @@ namespace Turf_Wars.Pages
 
             TurfWarsMapControl.Center = new Geopoint(pos);
             TurfWarsMapControl.ZoomLevel = 12.5;
-            //TestDriverMapCommanderAndSuch.TestAll(TurfWarsMapControl);
+            CompleteTest.TestAll(TurfWarsMapControl);
         }
     }
 }
