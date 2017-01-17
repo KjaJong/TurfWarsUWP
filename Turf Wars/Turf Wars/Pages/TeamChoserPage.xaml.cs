@@ -44,7 +44,6 @@ namespace Turf_Wars.Pages
                 case "yellowbutton":
                     _player.Team = new TeamYellow();
                     break;
-
             }
 
             GamePage.Player = _player;

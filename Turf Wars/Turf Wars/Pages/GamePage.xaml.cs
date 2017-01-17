@@ -40,20 +40,10 @@ namespace Turf_Wars.Pages
             MyFrame.Navigate(typeof(MapPage));
             WelcomeBlock.Text = $"Welcome {Player.Name}";
 
-            if (Player.Team is TeamBlue)
-            {
-                MyGrid.Background = new SolidColorBrush(Colors.Aqua);
-            }
-
-            else if (Player.Team is TeamRed)
-            {
-                MyGrid.Background = new SolidColorBrush(Colors.Coral);
-            }
-
-            else if (Player.Team is TeamYellow)
-            {
-                MyGrid.Background = new SolidColorBrush(Colors.Gold);
-            }
+            if (Player.Team is TeamBlue) MyGrid.Background = new SolidColorBrush(Colors.Aqua);
+            else if (Player.Team is TeamRed) MyGrid.Background = new SolidColorBrush(Colors.Coral);
+            else if (Player.Team is TeamYellow) MyGrid.Background = new SolidColorBrush(Colors.Gold);
+            
         }
 
 
@@ -78,25 +68,11 @@ namespace Turf_Wars.Pages
 
         private void Selector_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (Home.IsSelected)
-            {
-                MyFrame.Navigate(typeof(MapPage));
-            }
+            if (Home.IsSelected) MyFrame.Navigate(typeof(MapPage));
+            if (Store.IsSelected) MyFrame.Navigate(typeof(StorePage));
+            if (Bag.IsSelected) MyFrame.Navigate(typeof(InventoryPage));
+            if (Settings.IsSelected) MyFrame.Navigate(typeof(SettingsPage));
 
-            if (Store.IsSelected)
-            {
-                MyFrame.Navigate(typeof(StorePage));
-            }
-
-            if (Bag.IsSelected)
-            {
-                MyFrame.Navigate(typeof(InventoryPage));
-            }
-
-            if (Settings.IsSelected)
-            {
-                MyFrame.Navigate(typeof(SettingsPage), Player);
-            }
             if(MySplitView.IsPaneOpen) MySplitView.IsPaneOpen = false;
         }
     }
