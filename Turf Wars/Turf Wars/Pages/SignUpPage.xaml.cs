@@ -54,7 +54,13 @@ namespace Turf_Wars.Pages
             if (UsernameBox.Text == "" || PasswordBox.Password == "" || RePasswordBox.Password == "" ||
                 EmailBox.Text == "")
             {
-                Incorrect("One or more boxes haven't been filled in");
+                Incorrect("Please fill in every box");
+                return;
+            }
+
+            if (UsernameBox.Text.Length < 4 || UsernameBox.Text.Length > 10)
+            {
+                Incorrect("Username must be between 3-10 characters");
                 return;
             }
 

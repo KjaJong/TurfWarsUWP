@@ -60,6 +60,8 @@
             <TextBlock Grid.Row="5"
                        Grid.ColumnSpan="2"
                        Name="IncorrectBlock"
+                       TextWrapping="Wrap"
+                       TextAlignment="Center"
                        Visibility="Collapsed"
                        Style="{StaticResource MyTextBlockStyle}"
                        Foreground="Red"
