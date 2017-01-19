@@ -17,7 +17,7 @@ namespace Turf_Wars.Powers
         }
         public override void Activate()
         {
-            if (!GamePage.Player.IsInGeofence || Active) return;
+            if (GamePage.Player.IsInGeofence || Active) return;
             foreach (var p in GamePage.Player.Powers) if (p.Active) return;
 
             Active = true;

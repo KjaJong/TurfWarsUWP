@@ -39,7 +39,7 @@ namespace Turf_Wars.Pages
             localSettings.Values["LastOnline"] = Player.Name;
 
             MyFrame.Navigate(typeof(MapPage));
-            WelcomeBlock.Text = $"Hi {Player.Name}";
+            WelcomeBlock.Text = $"Welcome {Player.Name}";
 
             if (Player.Team is TeamBlue) MyGrid.Background = new SolidColorBrush(Colors.Aqua);
             else if (Player.Team is TeamRed) MyGrid.Background = new SolidColorBrush(Colors.Coral);

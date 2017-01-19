@@ -13,7 +13,6 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using Turf_Wars.DataWriting;
 using Turf_Wars.Teams;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
@@ -31,7 +30,7 @@ namespace Turf_Wars.Pages
             this.InitializeComponent();
         }
 
-        private async void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
             var button = (Button) sender;
             switch (button.Name.ToLower())
@@ -48,7 +47,6 @@ namespace Turf_Wars.Pages
             }
 
             GamePage.Player = _player;
-            await SaveLoadUtil.SavePlayerNames(_player);
             Frame.Navigate(typeof(GamePage));
         }
 
