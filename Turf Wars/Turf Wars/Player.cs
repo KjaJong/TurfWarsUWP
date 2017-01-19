@@ -51,7 +51,6 @@ namespace Turf_Wars
             Coinz = 50;
             Experience = 0;
             ExpToNextLvl = 100;
-            AddExperience(2000);
 
             Team = new NoTeam();
             Powers = new ObservableCollection<PowerUp>();

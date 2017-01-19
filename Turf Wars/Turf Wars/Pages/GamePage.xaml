@@ -27,7 +27,7 @@
                     FontFamily="segoe mdl2 assets"
                     FontSize="24"
                     Content="&#xE700;"
-                    Margin="0,0,20,0"
+                    Margin="0,0,10,0"
                     Click="Hamburger_OnClick"/>
             <TextBlock Name="WelcomeBlock"
                        FontSize="24"
