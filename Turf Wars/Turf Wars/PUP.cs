@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
@@ -28,9 +29,13 @@ namespace Turf_Wars
         public List<Player> BluePlayersInZone;
 
         private readonly CapturePoint _currentPoint;
+
+        //These fire once, then the garbage collector comes along. I need a work around for now
         private readonly Timer _timer;
         private readonly Timer _fightTimer;
 
+        //NEVER REMOVE THIS FIELD UNLESS ALL GC REFERENCES ARE DEAD
+        private GCLatencyMode old;
         //private readonly GeoLocation location { get;}
 
         public Pup(CapturePoint c)
@@ -41,6 +46,9 @@ namespace Turf_Wars
             _currentPoint = c;
 
             //So you can't start or stop this thing (explains why I loved the other timer). This is wonky but should do the trick.
+            //Note: NEVER DO THIS TRICK AGAIN, AND FOR THE LOVE OF GOD, TURN IT BACK TO WHAT IT WAS
+            old = GCSettings.LatencyMode;
+            GCSettings.LatencyMode = GCLatencyMode.LowLatency;
             _timer = new Timer(TickFuckingTock, null, Timeout.Infinite, Timeout.Infinite);
             _fightTimer = new Timer(Fight, null, Timeout.Infinite, Timeout.Infinite);
             StartCapture();
@@ -87,6 +95,8 @@ namespace Turf_Wars
                   CoreDispatcherPriority.Normal,
             () =>
             {
+                //ALWAYS KEEP THIS RETURN UNTILL ALL THE GC REFERENCES ARE DEAD
+                GCSettings.LatencyMode = old;
                 _fightTimer.Dispose();
                 AwardMoneyAndExp();
                 //waitEvent.Set();
