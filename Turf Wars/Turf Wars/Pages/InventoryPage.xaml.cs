@@ -60,7 +60,7 @@ namespace Turf_Wars.Pages
             
             ExpProgressBar.Maximum = GamePage.Player.ExpToNextLvl;
             ExpProgressBar.Value = GamePage.Player.Experience;
-            ProgressTextBlock.Text = $"{GamePage.Player.Experience}/{(int)GamePage.Player.ExpToNextLvl}";
+            ProgressTextBlock.Text = $"{GamePage.Player.Experience}/{(int)GamePage.Player.ExpToNextLvl} exp";
 
             if (GamePage.Player.Powers.Count == 0)
             {

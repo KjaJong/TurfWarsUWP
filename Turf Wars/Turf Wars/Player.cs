@@ -51,6 +51,7 @@ namespace Turf_Wars
             Coinz = 50;
             Experience = 0;
             ExpToNextLvl = 100;
+            AddExperience(2000);
 
             Team = new NoTeam();
             Powers = new ObservableCollection<PowerUp>();
@@ -64,12 +65,13 @@ namespace Turf_Wars
         public void AddExperience(int exp)
         {
             Experience += exp;
-            if (!(Experience >= ExpToNextLvl)) return;
+            if (Experience < ExpToNextLvl) return;
 
+            Experience = 0;
             Level++;
             Coinz += 10*Level;
-            Experience = Experience - (int)ExpToNextLvl;
             ExpToNextLvl *= 1.5;
+            AddExperience(exp - (int)ExpToNextLvl);
         }
 
         public override string ToString()
