@@ -58,11 +58,12 @@ namespace Turf_Wars
 
         public bool CheckLogin(string name, string password)
         {
-            return Name.Equals(name) && Password.Equals(password);
+            return Name == name && Password == password;
         }
 
         public void AddExperience(int exp)
         {
+            var difExp = ExpToNextLvl - Experience;
             Experience += exp;
             if (Experience < ExpToNextLvl) return;
 
@@ -70,7 +71,7 @@ namespace Turf_Wars
             Level++;
             Coinz += 10*Level;
             ExpToNextLvl *= 1.5;
-            AddExperience(exp - (int)ExpToNextLvl);
+            AddExperience(exp - (int)difExp);
         }
 
         public override string ToString()

@@ -102,7 +102,7 @@ namespace Turf_Wars
                     }
                     else if (state == GeofenceState.Entered)
                     {
-                        Debug.WriteLine("Senpai entered the fence! (♥ω♥*)");
+                        Debug.WriteLine("Entered the fence)");
                         if (GamePage.Player.Team is Teams.TeamBlue) { _gameLogic.CurrentPoint.BluePlayersInZone.Add(GamePage.Player); }
                         if (GamePage.Player.Team is Teams.TeamYellow) { _gameLogic.CurrentPoint.YellowPlayersInZone.Add(GamePage.Player); }
                         if (GamePage.Player.Team is Teams.TeamRed) { _gameLogic.CurrentPoint.RedPlayersInZone.Add(GamePage.Player); }
@@ -110,7 +110,7 @@ namespace Turf_Wars
                     }
                     else if (state == GeofenceState.Exited)
                     {
-                        Debug.WriteLine("Senpai left ( ≧Д≦)");
+                        Debug.WriteLine("Left the geofence");
                         if (GamePage.Player.Team is Teams.TeamBlue) { _gameLogic.CurrentPoint.BluePlayersInZone.Remove(GamePage.Player); }
                         if (GamePage.Player.Team is Teams.TeamYellow) { _gameLogic.CurrentPoint.YellowPlayersInZone.Remove(GamePage.Player); }
                         if (GamePage.Player.Team is Teams.TeamRed) { _gameLogic.CurrentPoint.RedPlayersInZone.Remove(GamePage.Player); }
