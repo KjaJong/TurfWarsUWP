@@ -64,7 +64,7 @@ namespace Turf_Wars.Pages
 
             if (GamePage.Player.Powers.Count == 0)
             {
-                PowerUpBlock.Text = "No powerups";
+                PowerUpBlock.Text = "You don't have any power ups";
                 return;
             }
             _powerUps = GamePage.Player.Powers;
